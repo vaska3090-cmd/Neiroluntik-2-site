@@ -40,7 +40,7 @@
         body.evening .stars { display: none; }
         body.evening .cloud { background: rgba(255, 200, 150, 0.8); }
         body.evening .grass { opacity: 0.6; }
-        body.evening .flower .petal { filter: brightness(0.9) saturate(0.7); }
+        body.evening .flower .petal { filter: brightness(0.9) saturate(0.8); }
         body.evening .about-box { background: rgba(255, 200, 150, 0.2); backdrop-filter: blur(6px); border: 1px solid rgba(255,200,150,0.3); }
 
         body.night { background: linear-gradient(180deg, #0B0E2A 0%, #1A1F3A 30%, #2A2F4A 45%, #1A3A1A 45%, #0D260D 70%, #051505 100%); }
@@ -51,8 +51,8 @@
         body.night .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 2s infinite alternate; }
         @keyframes twinkle { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
         body.night .cloud { display: none; }
-        body.night .grass { opacity: 0.3; filter: brightness(0.4); }
-        body.night .flower { filter: brightness(0.3) saturate(0.2); }
+        body.night .grass { opacity: 0.4; filter: brightness(0.5); }
+        body.night .flower { filter: brightness(0.6) saturate(0.6); }
         body.night .disclaimer { background: rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.1); }
         body.night .btn { background: rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.1); }
         body.night .hero { background: rgba(0,0,0,0.4); }
@@ -82,22 +82,57 @@
         /* ===== ТРАВА ===== */
         .grass { position: fixed; bottom: 0; left: 0; width: 100%; height: 120px; background: repeating-linear-gradient(90deg, #5DAE3E 0px, #4A8C2A 4px, #5DAE3E 8px, #4A8C2A 12px); clip-path: polygon(0% 40%, 10% 20%, 20% 50%, 30% 10%, 40% 60%, 50% 20%, 60% 50%, 70% 10%, 80% 60%, 90% 20%, 100% 40%, 100% 100%, 0% 100%); z-index: 0; pointer-events: none; }
 
-        /* ===== ЦВЕТЫ ===== */
-        .flower { position: fixed; z-index: 0; pointer-events: none; }
+        /* ===== НОВЫЕ ИДЕАЛЬНЫЕ ЦВЕТЫ ===== */
+        .flower { position: fixed; z-index: 0; pointer-events: none; width: 60px; height: 90px; }
         .flower-1 { bottom: 80px; left: 8%; }
         .flower-2 { bottom: 100px; right: 12%; }
         .flower-3 { bottom: 60px; left: 30%; }
         .flower-4 { bottom: 90px; right: 30%; }
-        .flower .stem { width: 4px; height: 50px; background: #2E7D32; margin: 0 auto; position: relative; }
-        .flower .petals { width: 40px; height: 40px; position: relative; margin: 0 auto -10px; }
-        .flower .petal { position: absolute; width: 16px; height: 16px; background: #FF69B4; border-radius: 50% 50% 0 50%; transform-origin: bottom left; }
-        .flower .petal:nth-child(1) { transform: rotate(0deg) translate(12px, 0); }
-        .flower .petal:nth-child(2) { transform: rotate(60deg) translate(12px, 0); }
-        .flower .petal:nth-child(3) { transform: rotate(120deg) translate(12px, 0); }
-        .flower .petal:nth-child(4) { transform: rotate(180deg) translate(12px, 0); }
-        .flower .petal:nth-child(5) { transform: rotate(240deg) translate(12px, 0); }
-        .flower .petal:nth-child(6) { transform: rotate(300deg) translate(12px, 0); }
-        .flower .center { width: 12px; height: 12px; background: #FFD700; border-radius: 50%; position: absolute; top: 14px; left: 14px; }
+        
+        .flower .stem {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 45px;
+            background: #2E7D32;
+            border-radius: 3px;
+        }
+        .flower .petals {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+        }
+        .flower .petal {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            top: 16px;
+            left: 16px;
+        }
+        /* Расставляем лепестки по кругу */
+        .flower .petal:nth-child(1) { transform: rotate(0deg) translateY(-14px); }
+        .flower .petal:nth-child(2) { transform: rotate(60deg) translateY(-14px); }
+        .flower .petal:nth-child(3) { transform: rotate(120deg) translateY(-14px); }
+        .flower .petal:nth-child(4) { transform: rotate(180deg) translateY(-14px); }
+        .flower .petal:nth-child(5) { transform: rotate(240deg) translateY(-14px); }
+        .flower .petal:nth-child(6) { transform: rotate(300deg) translateY(-14px); }
+        
+        .flower .center {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #FFD700;
+            border-radius: 50%;
+            top: 18px;
+            left: 18px;
+            z-index: 2;
+        }
 
         .stars { display: none; }
 
@@ -192,7 +227,11 @@
             .sun { width: 60px; height: 60px; top: 20px; right: 20px; }
             body.evening .sun { width: 80px; height: 80px; top: 30px; right: 20px; }
             .cloud-1, .cloud-2, .cloud-3 { display: none; }
-            .flower { display: none; }
+            .flower { transform: scale(0.8); }
+            .flower-1 { left: 2%; bottom: 60px; }
+            .flower-2 { right: 5%; bottom: 80px; }
+            .flower-3 { display: none; }
+            .flower-4 { display: none; }
             body.night .moon { width: 50px; height: 50px; top: 30px; right: 20px; }
         }
 
@@ -217,10 +256,54 @@
     <div class="grass"></div>
 
     <!-- Цветы -->
-    <div class="flower flower-1"><div class="petals"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="center"></div></div><div class="stem"></div></div>
-    <div class="flower flower-2"><div class="petals"><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="center"></div></div><div class="stem"></div></div>
-    <div class="flower flower-3"><div class="petals"><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="center" style="background:#FFA500;"></div></div><div class="stem"></div></div>
-    <div class="flower flower-4"><div class="petals"><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="center" style="background:#FFD700;"></div></div><div class="stem"></div></div>
+    <div class="flower flower-1">
+        <div class="petals">
+            <div class="petal" style="background:#FF69B4;"></div>
+            <div class="petal" style="background:#FF69B4;"></div>
+            <div class="petal" style="background:#FF69B4;"></div>
+            <div class="petal" style="background:#FF69B4;"></div>
+            <div class="petal" style="background:#FF69B4;"></div>
+            <div class="petal" style="background:#FF69B4;"></div>
+            <div class="center"></div>
+        </div>
+        <div class="stem"></div>
+    </div>
+    <div class="flower flower-2">
+        <div class="petals">
+            <div class="petal" style="background:#FFFFFF;"></div>
+            <div class="petal" style="background:#FFFFFF;"></div>
+            <div class="petal" style="background:#FFFFFF;"></div>
+            <div class="petal" style="background:#FFFFFF;"></div>
+            <div class="petal" style="background:#FFFFFF;"></div>
+            <div class="petal" style="background:#FFFFFF;"></div>
+            <div class="center" style="background:#FFD700;"></div>
+        </div>
+        <div class="stem"></div>
+    </div>
+    <div class="flower flower-3">
+        <div class="petals">
+            <div class="petal" style="background:#FF4500;"></div>
+            <div class="petal" style="background:#FF4500;"></div>
+            <div class="petal" style="background:#FF4500;"></div>
+            <div class="petal" style="background:#FF4500;"></div>
+            <div class="petal" style="background:#FF4500;"></div>
+            <div class="petal" style="background:#FF4500;"></div>
+            <div class="center" style="background:#FFA500;"></div>
+        </div>
+        <div class="stem"></div>
+    </div>
+    <div class="flower flower-4">
+        <div class="petals">
+            <div class="petal" style="background:#9370DB;"></div>
+            <div class="petal" style="background:#9370DB;"></div>
+            <div class="petal" style="background:#9370DB;"></div>
+            <div class="petal" style="background:#9370DB;"></div>
+            <div class="petal" style="background:#9370DB;"></div>
+            <div class="petal" style="background:#9370DB;"></div>
+            <div class="center" style="background:#FFD700;"></div>
+        </div>
+        <div class="stem"></div>
+    </div>
 
     <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
     <main class="wrap">
@@ -259,7 +342,7 @@
                 <svg viewBox="0 0 24 24"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.3.5a14.6 14.6 0 0 1 4.3 1.4 16.5 16.5 0 0 0-14.9 0A14.6 14.6 0 0 1 8.9 3.4L8.6 3a19.8 19.8 0 0 0-4.9 1.4C.7 8.9-.1 13.3.3 17.6a19.9 19.9 0 0 0 6 3 14.3 14.3 0 0 0 1.3-2.1 12.9 12.9 0 0 1-2-1c.2-.1.4-.2.5-.4a14.2 14.2 0 0 0 12 0c.2.2.4.3.5.4a12.9 12.9 0 0 1-2 1 14.3 14.3 0 0 0 1.3 2.1 19.9 19.9 0 0 0 6-3c.5-5-.7-9.4-3.6-13.2zM8.3 15c-1.2 0-2.1-1.1-2.1-2.4S7.1 10.2 8.3 10.2 10.4 11.3 10.4 12.6 9.5 15 8.3 15zm7.4 0c-1.2 0-2.1-1.1-2.1-2.4s.9-2.4 2.1-2.4 2.2 1.1 2.1 2.4S16.9 15 15.7 15z"/></svg>
                 <span class="btn-text"><b>Discord</b><small>Войти в сервер</small></span>
             </a>
-            <!-- НОВАЯ КНОПКА СТУДИИ -->
+            <!-- Кнопка Студии -->
             <button class="btn btn-studio" id="openStudioBtn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 <span class="btn-text"><b>Студия</b><small>Создать мешап</small></span>
@@ -279,7 +362,7 @@
             </div>
         </section>
 
-        <!-- Подвал с обновлённым текстом -->
+        <!-- Подвал -->
         <footer class="footer reveal">
             <p class="disclaimer">
                 Мы не ассоциируемся с CTB и студией «Мельница»
