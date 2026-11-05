@@ -61,6 +61,7 @@
         body.night .hero { background: rgba(0,0,0,0.4); }
         body.night .logo-text { text-shadow: 2px 2px 0 #222, 4px 4px 0 rgba(255,255,255,0.1); }
         body.night .about-box { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.1); }
+        body.night .fan-disclaimer { background: rgba(0, 0, 0, 0.6); }
 
         .sun, .moon { transition: all 1.5s ease; }
         .cloud, .grass, .flower { transition: opacity 1s ease, filter 1s ease, background 1s ease; }
@@ -158,6 +159,24 @@
         .reveal:nth-child(5) { animation-delay: 0.7s; }
         @keyframes fadeUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
 
+        /* ===== НОВЫЙ ТЕКСТ СВЕРХУ ===== */
+        .fan-disclaimer {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            max-width: 90%;
+            line-height: 1.4;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: background 0.5s ease;
+        }
+
         /* ===== ЛОГОТИП ===== */
         .hero { margin-bottom: 20px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(6px); padding: 16px 40px; border-radius: 60px; display: inline-block; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         .logo-text { font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif; font-weight: 900; font-size: clamp(2.8rem, 9vw, 5.2rem); color: #E91E63; text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(0,0,0,0.2); letter-spacing: 3px; line-height: 1.1; user-select: none; }
@@ -246,6 +265,7 @@
             .flower-3 { display: none; }
             .flower-4 { display: none; }
             body.night .moon { width: 50px; height: 50px; top: 30px; right: 20px; }
+            .fan-disclaimer { font-size: 0.75rem; padding: 8px 14px; }
         }
 
         @media (max-width: 420px) {
@@ -321,6 +341,12 @@
 
     <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
     <main class="wrap">
+        
+        <!-- НОВЫЙ ТЕКСТ СВЕРХУ -->
+        <div class="fan-disclaimer reveal">
+            НейроЛунтик 2 — Это мой фан-проект "НейроЛунтик 2". Я не присваиваю себе идею оригинального проекта.
+        </div>
+
         <header class="hero reveal">
             <div class="logo-text">НейроЛунтик 2</div>
         </header>
