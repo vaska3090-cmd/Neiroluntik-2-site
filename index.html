@@ -203,11 +203,19 @@
         <div class="studio-toolbar">
             <button class="studio-btn play" onclick="togglePlay()" id="play-btn">▶ Play</button>
             
+            <!-- Загрузка аудио -->
             <div class="file-input-wrapper">
-                <button class="studio-btn">🎵 Загрузить трек</button>
+                <button class="studio-btn">🎵 Трек</button>
                 <input type="file" id="audio-upload" accept="audio/*">
             </div>
-            <span id="audio-name" style="color:#aaa; font-size:0.85rem;">Трек не выбран</span>
+
+            <!-- НОВАЯ КНОПКА ЗАГРУЗКИ ФОТО ИЛИ ГИФКИ -->
+            <div class="file-input-wrapper">
+                <button class="studio-btn">🖼️ Фото/Гифка</button>
+                <input type="file" id="media-upload" accept="image/*,image/gif">
+            </div>
+
+            <span id="audio-name" style="color:#aaa; font-size:0.85rem; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Трек: нет</span>
             
             <div style="flex:1; min-width:150px;">
                 <input type="text" id="text-input" placeholder="Текст субтитра..." style="width:100%; background:#2e2e3a; border:1px solid #444; color:#fff; padding:6px 12px; border-radius:6px;">
@@ -228,6 +236,7 @@
         <div class="studio-workspace">
             <!-- Превью видео -->
             <div class="studio-preview-area" id="preview-area">
+                <!-- По умолчанию стоит 184706.png. Если загрузить новую, она заменится -->
                 <img src="184706.png" class="preview-media" alt="Превью мешапа" id="preview-img">
                 
                 <div class="preview-overlay" id="preview-overlay">
@@ -268,6 +277,7 @@
     <audio id="bg-audio"></audio>
 
     <script>
+        // ===== ВРЕМЯ СУТОК =====
         function updateTimeOfDay() {
             const hours = new Date().getHours();
             document.body.classList.remove('day', 'evening', 'night');
@@ -277,6 +287,7 @@
         }
         updateTimeOfDay(); setInterval(updateTimeOfDay, 60000);
 
+        // ===== СТУДИЯ =====
         const audio = document.getElementById('bg-audio');
         const timelineScroll = document.getElementById('timeline-scroll');
         const timelineContent = document.getElementById('timeline-content');
@@ -289,8 +300,6 @@
         
         const PIXELS_PER_SECOND = 50; 
         let isPlaying = false;
-
-        // Массив для хранения всех блоков на таймлайне
         let timelineItems = []; 
 
         function initTimeRuler() {
@@ -311,12 +320,21 @@
         function openStudio() { document.getElementById('main-page').style.display = 'none'; document.getElementById('studio-interface').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
         function closeStudio() { document.getElementById('main-page').style.display = 'flex'; document.getElementById('studio-interface').style.display = 'none'; document.body.style.overflow = 'auto'; stopAll(); }
 
+        // Загрузка своей картинки или гифки
+        document.getElementById('media-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                previewImg.src = url; // Меняем картинку превью
+            }
+        });
+
         // Загрузка аудио
         document.getElementById('audio-upload').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
                 audio.src = URL.createObjectURL(file);
-                document.getElementById('audio-name').textContent = file.name;
+                document.getElementById('audio-name').textContent = "Трек: " + file.name;
                 
                 trackAudio.innerHTML = '<div class="track-grid"></div>';
                 const audioBlock = document.createElement('div');
@@ -333,7 +351,6 @@
                     document.getElementById('play-btn').style.background = '#e23ea0';
                 });
 
-                // ГЛАВНАЯ ЛОГИКА: При проигрывании проверяем эффекты и субтитры
                 audio.addEventListener('timeupdate', () => {
                     const t = audio.currentTime;
                     const leftPos = t * PIXELS_PER_SECOND;
@@ -343,11 +360,9 @@
                         timelineScroll.scrollLeft = leftPos - 100;
                     }
 
-                    // 1. Сбрасываем эффекты с картинки
                     previewImg.className = 'preview-media';
                     let activeSubText = '';
 
-                    // 2. Ищем активные блоки
                     timelineItems.forEach(item => {
                         const start = item.start;
                         const end = item.start + item.duration;
@@ -360,15 +375,11 @@
                                 if (item.name === 'Глитч') previewImg.classList.add('fx-glitch');
                                 if (item.name === 'Инверсия') previewImg.classList.add('fx-invert');
                                 if (item.name === 'Шум') previewImg.classList.add('fx-noise');
-                                if (item.name === 'стоп эффекта') {
-                                    // Очищаем все эффекты
-                                    previewImg.className = 'preview-media';
-                                }
+                                if (item.name === 'стоп эффекта') previewImg.className = 'preview-media';
                             }
                         }
                     });
 
-                    // 3. Отображаем субтитры
                     if (activeSubText) {
                         subOverlay.style.display = 'block';
                         subOverlay.textContent = activeSubText;
@@ -426,7 +437,6 @@
             timelineItems.push(blockData);
         }
 
-        // Создание блока с возможностью перемещения и изменения размера
         function createResizableBlock(className, blockData, text) {
             const block = document.createElement('div');
             block.className = `block ${className}`;
@@ -453,9 +463,8 @@
 
             let startX, startWidth, startLeft;
 
-            // --- ЛОГИКА ПЕРЕТАСКИВАНИЯ ВСЕГО БЛОКА ---
             block.addEventListener('mousedown', (e) => {
-                if (e.target === handleLeft || e.target === handleRight) return; // Если тянем за ручки, игнорируем
+                if (e.target === handleLeft || e.target === handleRight) return;
                 e.stopPropagation();
                 
                 startX = e.clientX;
@@ -479,7 +488,6 @@
                 document.addEventListener('mouseup', stopDrag);
             });
 
-            // --- ЛЕВАЯ РУЧКА (ИЗМЕНЕНИЕ НАЧАЛА И ШИРИНЫ) ---
             handleLeft.addEventListener('mousedown', (e) => {
                 e.stopPropagation();
                 startX = e.clientX;
@@ -516,7 +524,6 @@
                 document.addEventListener('mouseup', stopDrag);
             });
 
-            // --- ПРАВАЯ РУЧКА (ИЗМЕНЕНИЕ ТОЛЬКО ШИРИНЫ) ---
             handleRight.addEventListener('mousedown', (e) => {
                 e.stopPropagation();
                 startX = e.clientX;
@@ -553,6 +560,10 @@
             trackEffects.innerHTML = '<div class="track-grid"></div>';
             timelineItems = [];
             previewImg.className = 'preview-media';
+            
+            // Сброс картинки на дефолтную
+            previewImg.src = '184706.png';
+            
             subOverlay.style.display = 'none';
         }
 
