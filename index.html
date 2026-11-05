@@ -5,16 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>НейроЛунтик 2 — Пародия</title>
     
-    <!-- ИКОНКА САЙТА -->
     <link rel="icon" type="image/jpeg" href="channels4_profile (2).jpg">
-
-    <!-- Шрифты -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 
     <style>
-        /* ================= ОБЩИЕ СТИЛИ САЙТА ================= */
+        /* ================= СТИЛИ ГЛАВНОЙ СТРАНИЦЫ ================= */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -25,72 +20,27 @@
             align-items: center;
             overflow-x: hidden;
             position: relative;
-            transition: background 1.5s ease, color 0.5s ease;
+            transition: background 1.5s ease;
         }
 
-        /* ===== ФОНЫ ДЛЯ РАЗНЫХ ВРЕМЁН СУТОК ===== */
+        /* ФОНЫ */
         body.day { background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 45%, #7EC850 45%, #5DAE3E 70%, #4A8C2A 100%); }
-        body.day .sun { display: block; background: radial-gradient(circle, #FFD700, #FFA500); box-shadow: 0 0 80px #FFD700; }
-        body.day .moon { display: none; }
-        body.day .stars { display: none; }
-        body.day .cloud { background: rgba(255,255,255,0.9); }
-        body.day .grass { opacity: 0.9; }
-        body.day .about-box { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.3); }
-
         body.evening { background: linear-gradient(180deg, #FF7E5F 0%, #FEB47B 30%, #D4A373 45%, #7EC850 45%, #5DAE3E 70%, #4A8C2A 100%); }
-        body.evening .sun { display: block; background: radial-gradient(circle, #FF4500, #FF6348); box-shadow: 0 0 80px #FF4500; width: 120px; height: 120px; top: 60px; right: 40px; }
-        body.evening .moon { display: none; }
-        body.evening .stars { display: none; }
-        body.evening .cloud { background: rgba(255, 200, 150, 0.8); }
-        body.evening .grass { opacity: 0.7; }
-        body.evening .flower .petal { filter: brightness(0.9) saturate(0.8); }
-        body.evening .about-box { background: rgba(255, 200, 150, 0.2); backdrop-filter: blur(6px); border: 1px solid rgba(255,200,150,0.3); }
-
         body.night { background: linear-gradient(180deg, #0B0E2A 0%, #1A1F3A 30%, #2A2F4A 45%, #1A3A1A 45%, #0D260D 70%, #051505 100%); }
-        body.night .sun { display: none; }
-        body.night .moon { display: block; position: fixed; top: 60px; right: 60px; width: 80px; height: 80px; background: radial-gradient(circle at 30% 30%, #FFFDE7, #FFF9C4); border-radius: 50%; box-shadow: 0 0 60px #FFF9C4, 0 0 120px rgba(255, 249, 196, 0.3); z-index: 0; pointer-events: none; }
-        body.night .moon::after { content: ''; position: absolute; width: 20px; height: 20px; background: #E8E0B0; border-radius: 50%; top: 15px; left: 40px; opacity: 0.6; box-shadow: 8px 12px 0 #E8E0B0, -5px 25px 0 #E8E0B0; }
-        body.night .stars { display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; background: transparent; }
-        body.night .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 2s infinite alternate; }
-        @keyframes twinkle { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
-        body.night .cloud { display: none; }
-        body.night .grass { opacity: 0.4; filter: brightness(0.5); }
-        body.night .flower { filter: brightness(0.6) saturate(0.6); }
-        body.night .disclaimer { background: rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.1); }
-        body.night .btn { background: rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.1); }
-        body.night .hero { background: rgba(0,0,0,0.4); }
-        body.night .logo-text { text-shadow: 2px 2px 0 #222, 4px 4px 0 rgba(255,255,255,0.1); }
-        body.night .about-box { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.1); }
-        body.night .fan-disclaimer { background: rgba(0, 0, 0, 0.6); }
 
-        .sun, .moon { transition: all 1.5s ease; }
-        .cloud, .grass, .flower { transition: opacity 1s ease, filter 1s ease, background 1s ease; }
-
-        /* ===== ФОНОВЫЕ ЭЛЕМЕНТЫ ===== */
-        .sun { position: fixed; top: 40px; right: 60px; width: 100px; height: 100px; border-radius: 50%; z-index: 0; pointer-events: none; }
+        .sun { position: fixed; top: 40px; right: 60px; width: 100px; height: 100px; border-radius: 50%; z-index: 0; pointer-events: none; background: radial-gradient(circle, #FFD700, #FFA500); box-shadow: 0 0 80px #FFD700; }
+        .moon { display: none; position: fixed; top: 60px; right: 60px; width: 80px; height: 80px; background: radial-gradient(circle at 30% 30%, #FFFDE7, #FFF9C4); border-radius: 50%; box-shadow: 0 0 60px #FFF9C4; z-index: 0; pointer-events: none; }
         
-        .cloud { position: fixed; border-radius: 100px; z-index: 0; pointer-events: none; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1)); }
-        .cloud::before, .cloud::after { content: ''; position: absolute; background: inherit; border-radius: inherit; }
-        .cloud-1 { width: 180px; height: 60px; top: 70px; left: 10%; animation: floatCloud 18s ease-in-out infinite alternate; }
-        .cloud-1::before { width: 80px; height: 80px; top: -40px; left: 20px; }
-        .cloud-1::after { width: 100px; height: 70px; top: -30px; left: 70px; }
-        .cloud-2 { width: 220px; height: 70px; top: 120px; right: 15%; animation: floatCloud 22s ease-in-out infinite alternate-reverse; }
-        .cloud-2::before { width: 90px; height: 90px; top: -50px; left: 30px; }
-        .cloud-2::after { width: 120px; height: 80px; top: -40px; left: 90px; }
-        .cloud-3 { width: 150px; height: 50px; top: 30px; left: 50%; transform: translateX(-50%); animation: floatCloud 20s ease-in-out infinite alternate; }
-        .cloud-3::before { width: 70px; height: 70px; top: -35px; left: 15px; }
-        .cloud-3::after { width: 80px; height: 60px; top: -25px; left: 60px; }
-        @keyframes floatCloud { 0% { transform: translateX(-30px); } 100% { transform: translateX(30px); } }
+        body.night .sun { display: none; }
+        body.night .moon { display: block; }
+        body.night .grass { opacity: 0.4; filter: brightness(0.5); }
 
-        .grass { position: fixed; bottom: 0; left: 0; width: 100%; height: 100px; background: repeating-linear-gradient(90deg, #5DAE3E 0px, #4A8C2A 4px, #5DAE3E 8px, #4A8C2A 12px); clip-path: polygon(0% 40%, 10% 20%, 20% 50%, 30% 10%, 40% 60%, 50% 20%, 60% 50%, 70% 10%, 80% 60%, 90% 20%, 100% 40%, 100% 100%, 0% 100%); z-index: 1; pointer-events: none; }
+        .grass { position: fixed; bottom: 0; left: 0; width: 100%; height: 100px; background: repeating-linear-gradient(90deg, #5DAE3E 0px, #4A8C2A 4px, #5DAE3E 8px, #4A8C2A 12px); clip-path: polygon(0% 40%, 10% 20%, 20% 50%, 30% 10%, 40% 60%, 50% 20%, 60% 50%, 70% 10%, 80% 60%, 90% 20%, 100% 40%, 100% 100%, 0% 100%); z-index: 1; pointer-events: none; transition: all 1s; }
 
         .flower { position: fixed; z-index: 0; pointer-events: none; width: 60px; height: 140px; bottom: 30px; }
-        .flower-1 { left: 8%; bottom: 40px; }
-        .flower-2 { right: 12%; bottom: 60px; }
-        .flower-3 { left: 30%; bottom: 20px; }
-        .flower-4 { right: 30%; bottom: 50px; }
+        .flower-1 { left: 8%; bottom: 40px; } .flower-2 { right: 12%; bottom: 60px; } .flower-3 { left: 30%; bottom: 20px; } .flower-4 { right: 30%; bottom: 50px; }
         .flower .stem { position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); width: 6px; height: 150px; background: linear-gradient(to right, #1B5E20, #2E7D32, #1B5E20); border-radius: 3px; z-index: 1; }
-        .flower .petals { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; z-index: 2; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); }
+        .flower .petals { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; z-index: 2; }
         .flower .petal { position: absolute; width: 20px; height: 20px; border-radius: 50%; top: 15px; left: 15px; }
         .flower .petal:nth-child(1) { transform: rotate(0deg) translateY(-15px); }
         .flower .petal:nth-child(2) { transform: rotate(60deg) translateY(-15px); }
@@ -98,542 +48,314 @@
         .flower .petal:nth-child(4) { transform: rotate(180deg) translateY(-15px); }
         .flower .petal:nth-child(5) { transform: rotate(240deg) translateY(-15px); }
         .flower .petal:nth-child(6) { transform: rotate(300deg) translateY(-15px); }
-        .flower .center { position: absolute; width: 16px; height: 16px; background: radial-gradient(circle, #FFD700, #FFA000); border-radius: 50%; top: 17px; left: 17px; z-index: 3; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .flower .center { position: absolute; width: 16px; height: 16px; background: radial-gradient(circle, #FFD700, #FFA000); border-radius: 50%; top: 17px; left: 17px; z-index: 3; }
 
-        .stars { display: none; }
-
-        /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
         .wrap { position: relative; z-index: 2; max-width: 820px; width: 100%; padding: 40px 24px 30px; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
-        .reveal { opacity: 0; animation: fadeUp 0.9s ease forwards; }
-        .reveal:nth-child(1) { animation-delay: 0.1s; }
-        .reveal:nth-child(2) { animation-delay: 0.25s; }
-        .reveal:nth-child(3) { animation-delay: 0.4s; }
-        .reveal:nth-child(4) { animation-delay: 0.55s; }
-        .reveal:nth-child(5) { animation-delay: 0.7s; }
-        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
+        .fan-disclaimer { font-size: 0.9rem; font-weight: 700; color: #fff; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(6px); padding: 10px 20px; border-radius: 20px; margin-bottom: 20px; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .hero { margin-bottom: 20px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(6px); padding: 16px 40px; border-radius: 60px; }
+        .logo-text { font-family: 'Comic Sans MS', cursive; font-weight: 900; font-size: clamp(2.8rem, 9vw, 5.2rem); color: #E91E63; text-shadow: 2px 2px 0 #fff; letter-spacing: 3px; }
+        
+        .about-box { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(6px); border-radius: 30px; padding: 20px 28px; margin-bottom: 28px; max-width: 700px; border: 1px solid rgba(255, 255, 255, 0.3); }
+        .about-box p { font-size: 1.05rem; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.4); font-weight: 600; }
+        .highlight { color: #FFD700; font-weight: 800; }
+        .pink { color: #FF69B4; font-weight: 800; }
+        .twitch-color { color: #9147ff; font-weight: 800; }
+        .cmd { background: rgba(255, 255, 255, 0.2); padding: 2px 12px; border-radius: 30px; color: #FFD700; font-weight: 800; }
 
-        .fan-disclaimer { font-size: 0.9rem; font-weight: 700; color: #fff; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(6px); padding: 10px 20px; border-radius: 20px; margin-bottom: 20px; border: 1px solid rgba(255, 255, 255, 0.2); text-shadow: 0 2px 4px rgba(0,0,0,0.5); max-width: 90%; line-height: 1.4; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: background 0.5s ease; }
-
-        .hero { margin-bottom: 20px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(6px); padding: 16px 40px; border-radius: 60px; display: inline-block; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        .logo-text { font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif; font-weight: 900; font-size: clamp(2.8rem, 9vw, 5.2rem); color: #E91E63; text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(0,0,0,0.2); letter-spacing: 3px; line-height: 1.1; user-select: none; }
-
-        .about-box { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(6px); border-radius: 30px; padding: 20px 28px; margin-bottom: 28px; max-width: 700px; width: 100%; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        .about-box p { font-size: 1.05rem; line-height: 1.7; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.4); font-weight: 600; margin: 0; }
-        .about-box .highlight { color: #FFD700; font-weight: 800; }
-        .about-box .pink { color: #FF69B4; font-weight: 800; }
-        .about-box .twitch-color { color: #9147ff; font-weight: 800; }
-        .about-box .cmd { background: rgba(255, 255, 255, 0.2); padding: 2px 12px; border-radius: 30px; color: #FFD700; font-weight: 800; font-family: 'Comic Sans MS', cursive; border: 1px solid rgba(255, 215, 0, 0.3); display: inline-block; }
-
-        /* ===== КНОПКИ ===== */
         .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 32px; width: 100%; }
-        .btn { display: inline-flex; align-items: center; gap: 14px; padding: 14px 28px; border-radius: 60px; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1rem; color: #fff; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.5s ease, border 0.5s ease; border: none; cursor: pointer; min-width: 180px; justify-content: center; flex: 1 0 auto; max-width: 280px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); }
-        .btn:hover { transform: scale(1.04); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); background: rgba(0, 0, 0, 0.6); }
-        .btn svg { width: 28px; height: 28px; fill: currentColor; flex-shrink: 0; }
-        .btn-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
-        .btn-text b { font-size: 1.05rem; font-weight: 800; }
-        .btn-text small { font-weight: 600; font-size: 0.75rem; opacity: 0.9; }
+        .btn { display: inline-flex; align-items: center; gap: 14px; padding: 14px 28px; border-radius: 60px; font-weight: 700; color: #fff; text-decoration: none; cursor: pointer; min-width: 180px; justify-content: center; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2); transition: 0.2s; }
+        .btn:hover { transform: scale(1.04); background: rgba(0, 0, 0, 0.6); }
+        .btn svg { width: 28px; height: 28px; fill: currentColor; }
+        .btn-text { display: flex; flex-direction: column; align-items: flex-start; }
+        .btn-tw { background: rgba(145, 71, 255, 0.8); } .btn-yt { background: rgba(255, 0, 0, 0.8); } .btn-dc { background: rgba(88, 101, 242, 0.8); } .btn-studio { background: rgba(226, 62, 160, 0.8); }
 
-        .btn-tw { background: rgba(145, 71, 255, 0.8); }
-        .btn-tw:hover { background: #9147ff; }
-        .btn-yt { background: rgba(255, 0, 0, 0.8); }
-        .btn-yt:hover { background: #ff0000; }
-        .btn-dc { background: rgba(88, 101, 242, 0.8); }
-        .btn-dc:hover { background: #5865f2; }
-        .btn-studio { background: rgba(226, 62, 160, 0.8); border-color: rgba(226, 62, 160, 0.5); }
-        .btn-studio:hover { background: #e23ea0; }
-
-        /* ===== ПЛЕЕР ===== */
-        .player { width: 100%; max-width: 720px; margin-bottom: 30px; border-radius: 18px; overflow: hidden; box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4); border: 3px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(2px); }
-        body.night .player { border-color: rgba(255,255,255,0.2); }
+        .player { width: 100%; max-width: 720px; margin-bottom: 30px; border-radius: 18px; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.5); }
         .player-frame { position: relative; padding-bottom: 56.25%; height: 0; }
         .player-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        /* ===== ПОДВАЛ ===== */
-        .footer { width: 100%; max-width: 640px; margin-top: 6px; }
-        .disclaimer { font-size: 0.85rem; color: #fff; line-height: 1.6; font-weight: 600; text-shadow: 0 2px 8px rgba(0,0,0,0.5); background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(4px); padding: 16px 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); }
-        .disclaimer a { color: #FFD700; text-decoration: none; }
-        .disclaimer a:hover { text-decoration: underline; }
+        .disclaimer { font-size: 0.85rem; color: #fff; background: rgba(0, 0, 0, 0.3); padding: 16px; border-radius: 20px; }
+        .disclaimer a { color: #FFD700; }
 
-        /* ====================================================================
-           ИНТЕРФЕЙС СТУДИИ (ПОЛНОЭКРАННЫЙ)
-           ==================================================================== */
+        /* ================= СТИЛИ СТУДИИ (РАБОЧЕЙ) ================= */
         #studio-interface {
-            display: none; /* Скрыто по умолчанию */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #0f0f13;
-            color: #e0e0e0;
-            z-index: 10000;
-            flex-direction: column;
-            font-family: 'Nunito', sans-serif;
-            overflow: hidden;
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #0f0f13; color: #e0e0e0; z-index: 10000; flex-direction: column;
+            font-family: 'Nunito', sans-serif; overflow: hidden;
         }
 
-        /* Шапка студии */
-        .studio-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            background: #1a1a24;
-            border-bottom: 1px solid #333;
-        }
+        .studio-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background: #1a1a24; border-bottom: 1px solid #333; }
         .studio-logo { font-family: 'Comic Sans MS', cursive; font-weight: 900; font-size: 1.2rem; color: #e23ea0; }
-        .studio-close-btn {
-            background: #e23ea0;
-            color: #fff;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 6px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .studio-close-btn:hover { background: #ff5eb8; }
+        .studio-close-btn { background: #e23ea0; color: #fff; border: none; padding: 6px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; }
 
-        /* Панель инструментов */
-        .studio-toolbar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
-            background: #22222e;
-            border-bottom: 1px solid #333;
-            flex-wrap: wrap;
-        }
-        .studio-toolbar input[type="text"],
-        .studio-toolbar select,
-        .studio-toolbar input[type="number"] {
-            background: #2e2e3a;
-            border: 1px solid #444;
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 0.85rem;
-            outline: none;
-        }
-        .studio-toolbar input:focus, .studio-toolbar select:focus { border-color: #e23ea0; }
-        .studio-btn-sm {
-            background: #3a3a4a;
-            color: #fff;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: 0.2s;
-            white-space: nowrap;
-        }
+        .studio-toolbar { display: flex; align-items: center; gap: 10px; padding: 10px 20px; background: #22222e; border-bottom: 1px solid #333; flex-wrap: wrap; }
+        .studio-btn-sm { background: #3a3a4a; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
         .studio-btn-sm:hover { background: #4a4a5a; }
+        .studio-toolbar select, .studio-toolbar input { background: #2e2e3a; border: 1px solid #444; color: #fff; padding: 6px 12px; border-radius: 6px; outline: none; }
 
-        /* Основная область */
-        .studio-main {
-            display: flex;
-            flex: 1;
-            gap: 15px;
-            padding: 15px 20px;
-            overflow: hidden;
+        .studio-main { display: flex; flex: 1; gap: 15px; padding: 15px 20px; overflow: hidden; }
+        
+        .studio-sidebar-left { width: 260px; background: #1a1a24; border-radius: 12px; padding: 15px; border: 1px solid #333; display: flex; flex-direction: column; gap: 10px; }
+        .studio-section-title { font-size: 0.75rem; text-transform: uppercase; color: #666; font-weight: 800; letter-spacing: 1px; margin-bottom: 5px; }
+        
+        .studio-preview { flex: 1; background: #000; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 2px solid #333; overflow: hidden; }
+        
+        /* Персонаж в студии */
+        .character-avatar {
+            width: 120px; height: 120px; background: #e23ea0; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 60px; transition: 0.1s; position: relative;
         }
-
-        /* Левая панель */
-        .studio-sidebar-left {
-            width: 260px;
-            background: #1a1a24;
-            border-radius: 12px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            border: 1px solid #333;
-            overflow-y: auto;
+        .character-avatar.talking { animation: bounce 0.2s infinite alternate; }
+        .character-avatar::after {
+            content: ''; position: absolute; bottom: 30px; width: 40px; height: 10px;
+            background: #000; border-radius: 50%; transition: 0.1s;
         }
-        .studio-tabs { display: flex; gap: 5px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .studio-tab { background: none; border: none; color: #888; font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
-        .studio-tab.active { background: #2e2e3a; color: #fff; }
-        .studio-section-title { font-size: 0.75rem; text-transform: uppercase; color: #666; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; }
-        .studio-effect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-        .studio-effect-btn { background: #2e2e3a; border: 1px solid #444; color: #ccc; padding: 6px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; cursor: pointer; text-align: center; transition: 0.2s; }
-        .studio-effect-btn:hover { background: #3e3e4a; border-color: #e23ea0; color: #fff; }
-        .studio-effect-btn.active { background: #e23ea0; border-color: #e23ea0; color: #fff; }
+        .character-avatar.talking::after { height: 30px; border-radius: 10px; animation: mouthMove 0.2s infinite alternate; }
+        
+        @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+        @keyframes mouthMove { from { height: 10px; } to { height: 30px; } }
 
-        /* Центральная область */
-        .studio-preview {
-            flex: 1;
-            background: #000;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            border: 2px solid #333;
-            overflow: hidden;
-        }
-        .studio-preview-placeholder { text-align: center; color: #555; }
-        .studio-preview-placeholder h2 { font-size: 1.5rem; margin-bottom: 10px; color: #666; }
-        .studio-preview-placeholder p { font-size: 0.9rem; }
+        .studio-subtitles-overlay { position: absolute; bottom: 20px; width: 80%; background: rgba(0,0,0,0.7); padding: 10px; text-align: center; font-size: 1.2rem; border-radius: 8px; border: 1px solid #444; display: none; }
 
-        /* Правая панель */
-        .studio-sidebar-right {
-            width: 280px;
-            background: #1a1a24;
-            border-radius: 12px;
-            padding: 15px;
-            border: 1px solid #333;
-            display: flex;
-            flex-direction: column;
-        }
-        .studio-sidebar-right h3 { font-size: 1rem; color: #fff; margin-bottom: 10px; }
-        .studio-sidebar-right p { font-size: 0.8rem; color: #888; line-height: 1.5; }
+        .studio-sidebar-right { width: 280px; background: #1a1a24; border-radius: 12px; padding: 15px; border: 1px solid #333; overflow-y: auto; }
+        .subtitle-item { background: #2e2e3a; padding: 8px; border-radius: 6px; margin-bottom: 6px; font-size: 0.85rem; display: flex; justify-content: space-between; border-left: 3px solid #e23ea0; }
 
-        /* Таймлайн */
-        .studio-timeline {
-            background: #1a1a24;
-            border-top: 1px solid #333;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            min-height: 60px;
-        }
-        .studio-timeline-controls { display: flex; align-items: center; gap: 10px; color: #aaa; font-size: 0.85rem; }
-        .studio-timeline-track { flex: 1; height: 30px; background: #2e2e3a; border-radius: 6px; position: relative; overflow: hidden; cursor: pointer; }
-        .studio-timeline-progress { height: 100%; width: 0%; background: #e23ea0; border-radius: 6px; transition: width 0.1s; }
-        .studio-timeline-time { font-size: 0.85rem; color: #aaa; font-weight: 600; min-width: 100px; }
+        .studio-timeline { background: #1a1a24; border-top: 1px solid #333; padding: 15px 20px; display: flex; align-items: center; gap: 15px; }
+        .studio-timeline-track { flex: 1; height: 20px; background: #2e2e3a; border-radius: 4px; position: relative; overflow: hidden; }
+        .studio-timeline-progress { height: 100%; width: 0%; background: #e23ea0; transition: width 0.1s linear; }
+        .studio-time { font-weight: 700; color: #e23ea0; font-family: monospace; font-size: 1rem; }
 
-        /* АДАПТИВНОСТЬ САЙТА */
-        @media (max-width: 600px) {
-            .wrap { padding: 24px 16px 20px; }
-            .logo-text { font-size: clamp(2rem, 7vw, 3.2rem); }
-            .hero { padding: 12px 24px; }
-            .about-box { padding: 16px 18px; }
-            .about-box p { font-size: 0.95rem; }
-            .btn { min-width: 140px; padding: 12px 20px; font-size: 0.9rem; gap: 10px; flex: 1 1 45%; max-width: 100%; }
-            .btn svg { width: 22px; height: 22px; }
-            .btn-text b { font-size: 0.95rem; }
-            .btn-text small { font-size: 0.65rem; }
-            .links { gap: 10px; }
-            .sun { width: 60px; height: 60px; top: 20px; right: 20px; }
-            body.evening .sun { width: 80px; height: 80px; top: 30px; right: 20px; }
-            .cloud-1, .cloud-2, .cloud-3 { display: none; }
-            .flower { transform: scale(0.8); }
-            .flower-1 { left: 2%; bottom: 20px; }
-            .flower-2 { right: 5%; bottom: 30px; }
-            .flower-3 { display: none; }
-            .flower-4 { display: none; }
-            body.night .moon { width: 50px; height: 50px; top: 30px; right: 20px; }
-            .fan-disclaimer { font-size: 0.75rem; padding: 8px 14px; }
+        @media (max-width: 768px) {
             .studio-sidebar-left, .studio-sidebar-right { display: none; }
+            .about-box { padding: 15px; } .logo-text { font-size: 2rem; }
+            .flower { transform: scale(0.7); } .cloud { display: none; }
         }
     </style>
 </head>
 <body>
-    <!-- ===== ФОНОВЫЕ ЭЛЕМЕНТЫ САЙТА ===== -->
-    <div class="sun" id="sun"></div>
-    <div class="moon" id="moon"></div>
-    <div class="stars" id="stars"></div>
-
-    <div class="cloud cloud-1"></div>
-    <div class="cloud cloud-2"></div>
-    <div class="cloud cloud-3"></div>
-
-    <!-- Цветы -->
-    <div class="flower flower-1">
-        <div class="petals"><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="center"></div></div><div class="stem"></div>
-    </div>
-    <div class="flower flower-2">
-        <div class="petals"><div class="petal" style="background:#FFFFFF;"></div><div class="petal" style="background:#FFFFFF;"></div><div class="petal" style="background:#FFFFFF;"></div><div class="petal" style="background:#FFFFFF;"></div><div class="petal" style="background:#FFFFFF;"></div><div class="petal" style="background:#FFFFFF;"></div><div class="center" style="background:#FFD700;"></div></div><div class="stem"></div>
-    </div>
-    <div class="flower flower-3">
-        <div class="petals"><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="center" style="background:#FFA500;"></div></div><div class="stem"></div>
-    </div>
-    <div class="flower flower-4">
-        <div class="petals"><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="center" style="background:#FFD700;"></div></div><div class="stem"></div>
-    </div>
-
+    <!-- ФОН -->
+    <div class="sun"></div>
+    <div class="moon"></div>
+    
+    <!-- ЦВЕТЫ -->
+    <div class="flower flower-1"><div class="petals"><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="center"></div></div><div class="stem"></div></div>
+    <div class="flower flower-2"><div class="petals"><div class="petal" style="background:#FFF;"></div><div class="petal" style="background:#FFF;"></div><div class="petal" style="background:#FFF;"></div><div class="petal" style="background:#FFF;"></div><div class="petal" style="background:#FFF;"></div><div class="petal" style="background:#FFF;"></div><div class="center"></div></div><div class="stem"></div></div>
     <div class="grass"></div>
 
-    <!-- ===== ОСНОВНОЙ КОНТЕНТ САЙТА ===== -->
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
     <main class="wrap" id="main-page">
-        <div class="fan-disclaimer reveal">
+        <div class="fan-disclaimer">
             НейроЛунтик 2 — Это мой фан-проект "НейроЛунтик 2". Я не присваиваю себе идею оригинального проекта.
         </div>
 
-        <header class="hero reveal">
+        <header class="hero">
             <div class="logo-text">НейроЛунтик 2</div>
         </header>
 
-        <section class="about-box reveal">
+        <section class="about-box">
             <p>
-                <strong class="pink">Я пародия на НейроЛунтика!</strong>
-                Стримлю на <strong class="twitch-color">Twitch</strong>.
-                <br />
-                На моих трансляциях есть <strong class="highlight">новогодние эвенты</strong>,
-                <strong class="highlight">поздравления с днём рождения</strong>
-                и <strong class="highlight">много чего ещё</strong>!
-                <br /><br />
-                <strong>Ты тоже можешь создавать собственные темы!</strong>
-                Просто напиши в чат <span class="cmd">/тема (своя тема)</span>
-                — и она попадёт в очередь, а персонажи начнут говорить на твою тему!
+                <strong class="pink">Я пародия на НейроЛунтика!</strong> Стримлю на <strong class="twitch-color">Twitch</strong>.<br>
+                На моих трансляциях есть <strong class="highlight">новогодние эвенты</strong>, <strong class="highlight">поздравления с днём рождения</strong> и <strong class="highlight">много чего ещё</strong>!<br><br>
+                <strong>Ты тоже можешь создавать собственные темы!</strong> Просто напиши в чат <span class="cmd">/тема (своя тема)</span> — и она попадёт в очередь!
             </p>
         </section>
 
-        <nav class="links reveal">
-            <!-- Кнопка Twitch -->
-            <a class="btn btn-tw" href="https://www.twitch.tv/neirolyntik2" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
-                <span class="btn-text"><b>Twitch</b><small>Смотреть стрим</small></span>
+        <nav class="links">
+            <a class="btn btn-tw" href="https://www.twitch.tv/neirolyntik2" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+                <span class="btn-text"><b>Twitch</b></span>
             </a>
-            <!-- Кнопка YouTube -->
-            <a class="btn btn-yt" href="https://www.youtube.com/@neirolyntik2" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                <span class="btn-text"><b>YouTube</b><small>Канал</small></span>
+            <a class="btn btn-yt" href="https://www.youtube.com/@neirolyntik2" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                <span class="btn-text"><b>YouTube</b></span>
             </a>
-            <!-- Кнопка Discord -->
-            <a class="btn btn-dc" href="https://discord.gg/EdN2mcxxAE" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.5168 0-.1636-.3847-.3973-.8742-.6083-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-                <span class="btn-text"><b>Discord</b><small>Войти в сервер</small></span>
+            <a class="btn btn-dc" href="https://discord.gg/EdN2mcxxAE" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.5168 0-.1636-.3847-.3973-.8742-.6083-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
+                <span class="btn-text"><b>Discord</b></span>
             </a>
-            <!-- Кнопка Студии (вызывает JS функцию) -->
             <button class="btn btn-studio" onclick="openStudio()">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/></svg>
-                <span class="btn-text"><b>Студия</b><small>Создать мешап</small></span>
+                <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/></svg>
+                <span class="btn-text"><b>Студия</b></span>
             </button>
         </nav>
 
-        <section class="player reveal">
+        <section class="player">
             <div class="player-frame">
-                <iframe
-                    src="https://player.twitch.tv/?channel=neirolyntik2&parent=vaska3090-cmd.github.io&autoplay=false"
-                    title="Прямой эфир NeiroLyntik 2 на Twitch"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allowfullscreen
-                ></iframe>
+                <iframe src="https://player.twitch.tv/?channel=neirolyntik2&parent=vaska3090-cmd.github.io&autoplay=false" allowfullscreen></iframe>
             </div>
         </section>
 
-        <footer class="footer reveal">
-            <p class="disclaimer">
-                Мы не ассоциируемся с CTB и студией «Мельница»
-                <br /><br />
-                <strong style="color:#FFD700;">Создавай свои темы!</strong>
-                Напиши в <a href="https://discord.gg/EdN2mcxxAE" target="_blank">дискорд сервер НейроЛунтик 2</a> на канал "предложить тему" 
-                <code style="background:rgba(255,255,255,0.2);padding:2px 10px;border-radius:20px;color:#FFD700;">/тема (своя тема)</code>
-                — и она попадёт в очередь! 🎉
-            </p>
+        <footer class="disclaimer">
+            Мы не ассоциируемся с CTB и студией «Мельница»<br><br>
+            <strong style="color:#FFD700;">Создавай свои темы!</strong> Напиши в <a href="https://discord.gg/EdN2mcxxAE">дискорд сервер</a> на канал "предложить тему" <code>/тема (своя тема)</code>
         </footer>
     </main>
 
-    <!-- ====================================================================
-         ИНТЕРФЕЙС СТУДИИ (СКРЫТ ПО УМОЛЧАНИЮ)
-         ==================================================================== -->
+    <!-- ================= РАБОЧАЯ СТУДИЯ ================= -->
     <div id="studio-interface">
-        
-        <!-- Шапка студии -->
         <header class="studio-header">
-            <div class="studio-logo">НЕЙРОЛУНТИК СТУДИЯ</div>
+            <div class="studio-logo">НЕЙРОЛУНТИК СТУДИЯ (ДЕМО)</div>
             <button class="studio-close-btn" onclick="closeStudio()">Выйти на главную</button>
         </header>
 
-        <!-- Панель инструментов студии -->
         <div class="studio-toolbar">
-            <input type="text" placeholder="Название" style="width: 120px;">
-            <button class="studio-btn-sm">Новый</button>
-            <button class="studio-btn-sm">Открыть .vtt</button>
-            <button class="studio-btn-sm">Загрузить mp3</button>
-            <button class="studio-btn-sm">По ссылке</button>
-            <span style="color: #666; font-size: 0.8rem;">MONTAGEM_DOMER__SUPE... (3).mp3</span>
-            
-            <select>
-                <option>Тип: Дуэт-мешап</option>
-                <option>Тип: Соло-мешап</option>
+            <button class="studio-btn-sm" style="background:#e23ea0;" onclick="playMesha()">▶ Play / Пауза</button>
+            <select id="char-select">
+                <option value="Кузя">Поёт: Кузя</option>
+                <option value="Лунтик">Поёт: Лунтик</option>
+                <option value="Мила">Поёт: Мила</option>
             </select>
-            <select>
-                <option>Поёт: Кузя</option>
-                <option>Поёт: Лунтик</option>
-            </select>
-            <input type="number" placeholder="BPM" style="width: 60px;" value="120">
-            <button class="studio-btn-sm">Tan</button>
-            <label style="font-size: 0.8rem; color: #aaa; display: flex; align-items: center; gap: 5px;">
-                <input type="checkbox"> Без автокамеры
-            </label>
-            <button class="studio-btn-sm">Отвязать текст</button>
-            
-            <button class="studio-btn-sm" style="background: #e23ea0; margin-left: auto;" onclick="alert('Мешап опубликован!')">Опубликовать</button>
+            <input type="text" id="text-input" placeholder="Введи текст реплики..." style="flex:1; min-width:200px;">
+            <button class="studio-btn-sm" onclick="addSubtitle()">+ Добавить реплику</button>
+            <button class="studio-btn-sm" style="background:#ff0000;" onclick="clearAll()">Очистить всё</button>
         </div>
 
-        <!-- Основная область студии -->
         <div class="studio-main">
-            
-            <!-- Левая панель -->
             <aside class="studio-sidebar-left">
-                <div class="studio-tabs">
-                    <button class="studio-tab active">Библиотека</button>
-                    <button class="studio-tab">Реплики</button>
-                    <button class="studio-tab">VTT</button>
-                </div>
-
-                <div>
-                    <div class="studio-section-title">Субтитры</div>
-                    <button class="studio-btn-sm" style="width: 100%; text-align: left;">+ Реплика</button>
-                </div>
-
-                <div>
-                    <div class="studio-section-title">Эффекты экрана</div>
-                    <div class="studio-effect-grid">
-                        <button class="studio-effect-btn">Тряска экрана</button>
-                        <button class="studio-effect-btn">Покачивание</button>
-                        <button class="studio-effect-btn">Пикселизация</button>
-                        <button class="studio-effect-btn">Воронка</button>
-                        <button class="studio-effect-btn">Помехи строк</button>
-                        <button class="studio-effect-btn">Волны</button>
-                        <button class="studio-effect-btn">Искажение</button>
-                        <button class="studio-effect-btn">Глитч</button>
-                        <button class="studio-effect-btn">Неон-контур</button>
-                        <button class="studio-effect-btn">Ч/Б экран</button>
-                        <button class="studio-effect-btn">Шум</button>
-                        <button class="studio-effect-btn">Линии</button>
-                        <button class="studio-effect-btn">Полосы</button>
-                        <button class="studio-effect-btn">Туман</button>
-                        <button class="studio-effect-btn">■ стоп эффекта</button>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="studio-section-title">Фон</div>
-                    <div class="studio-effect-grid">
-                        <button class="studio-effect-btn">Белый резко</button>
-                        <button class="studio-effect-btn">Чёрный за 1с</button>
-                    </div>
-                </div>
+                <div class="studio-section-title">Библиотека</div>
+                <button class="studio-btn-sm" style="width:100%; text-align:left;" onclick="document.getElementById('text-input').focus()">+ Реплика</button>
+                <div class="studio-section-title" style="margin-top:10px;">Инфо</div>
+                <p style="font-size:0.8rem; color:#888;">Введи текст в поле сверху и нажми "Добавить реплику". Затем нажми Play. Персонаж реально озвучит текст голосом браузера!</p>
             </aside>
 
-            <!-- Центральная область (превью) -->
             <section class="studio-preview">
-                <div class="studio-preview-placeholder">
-                    <h2>0:00.00 • камера: Основной</h2>
-                    <p>Здесь будет предпросмотр мешапа</p>
-                </div>
+                <div class="character-avatar" id="avatar">🤖</div>
+                <div class="studio-subtitles-overlay" id="sub-overlay">Субтитры...</div>
             </section>
 
-            <!-- Правая панель -->
             <aside class="studio-sidebar-right">
-                <h3>Ничего не выбрано</h3>
-                <p>
-                    Клик по реплике или событию на таймлайне — здесь появятся его настройки.
-                    <br><br>
-                    Двойной клик по дорожке «Субтитры» — новая реплика.
-                    <br><br>
-                    Пробел — play/pause.
-                    <br>
-                    N — реплика.
-                    <br>
-                    S — разрез.
-                    <br>
-                    Del — удалить.
-                </p>
+                <div class="studio-section-title">Твои реплики</div>
+                <div id="sub-list"></div>
             </aside>
         </div>
 
-        <!-- Таймлайн -->
         <div class="studio-timeline">
-            <div class="studio-timeline-controls">
-                <span>⏮</span>
-                <span>◀ 5</span>
-                <span>▶</span>
-                <span>5 ▶</span>
-                <span class="studio-timeline-time" id="studio-time">0:00.00 / 0:43.95</span>
+            <div class="studio-timeline-track">
+                <div class="studio-timeline-progress" id="progress-bar"></div>
             </div>
-            <div class="studio-timeline-track" id="studio-track">
-                <div class="studio-timeline-progress" id="studio-progress"></div>
-            </div>
-            <div class="studio-timeline-controls">
-                <span>Звук</span>
-                <input type="range" min="0" max="100" value="80" style="width: 80px; accent-color: #e23ea0;">
-            </div>
+            <div class="studio-time" id="time-display">00:00</div>
         </div>
     </div>
 
-    <!-- ================= СКРИПТЫ ================= -->
     <script>
-        // ===== УПРАВЛЕНИЕ ВРЕМЕНЕМ СУТОК =====
-        function createStars() {
-            const container = document.getElementById('stars');
-            for (let i = 0; i < 150; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 3 + 1;
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 70 + '%';
-                star.style.animationDelay = (Math.random() * 3) + 's';
-                star.style.animationDuration = (1.5 + Math.random() * 2) + 's';
-                container.appendChild(star);
-            }
-        }
-        createStars();
-
+        // ===== СМЕНА ВРЕМЕНИ СУТОК НА САЙТЕ =====
         function updateTimeOfDay() {
             const hours = new Date().getHours();
-            const body = document.body;
-            body.classList.remove('day', 'evening', 'night');
-            if (hours >= 7 && hours < 17) body.classList.add('day');
-            else if (hours >= 17 && hours < 21) body.classList.add('evening');
-            else body.classList.add('night');
+            document.body.classList.remove('day', 'evening', 'night');
+            if (hours >= 7 && hours < 17) document.body.classList.add('day');
+            else if (hours >= 17 && hours < 21) document.body.classList.add('evening');
+            else document.body.classList.add('night');
         }
         updateTimeOfDay();
         setInterval(updateTimeOfDay, 60000);
 
-        // ===== ЛОГИКА СТУДИИ =====
+        // ===== ЛОГИКА РАБОЧЕЙ СТУДИИ =====
+        let subtitles = [];
+        let isPlaying = false;
+        let currentIndex = 0;
+
         function openStudio() {
             document.getElementById('main-page').style.display = 'none';
             document.getElementById('studio-interface').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Отключаем прокрутку
+            document.body.style.overflow = 'hidden';
         }
 
         function closeStudio() {
             document.getElementById('main-page').style.display = 'flex';
             document.getElementById('studio-interface').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Включаем прокрутку обратно
+            document.body.style.overflow = 'auto';
+            window.speechSynthesis.cancel();
+            isPlaying = false;
         }
 
-        // Демонстрация работы таймлайна в студии
-        const studioTrack = document.getElementById('studio-track');
-        const studioProgress = document.getElementById('studio-progress');
-        const studioTime = document.getElementById('studio-time');
-        let progressPercent = 0;
+        function addSubtitle() {
+            const text = document.getElementById('text-input').value.trim();
+            const char = document.getElementById('char-select').value;
+            if (!text) return alert('Введи текст!');
 
-        if(studioTrack) {
-            studioTrack.addEventListener('click', (e) => {
-                const rect = studioTrack.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                progressPercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
-                studioProgress.style.width = progressPercent + '%';
-                
-                // Обновляем время (примерно)
-                const totalSecs = 43.95;
-                const currentSecs = (progressPercent / 100) * totalSecs;
-                const mins = Math.floor(currentSecs / 60);
-                const secs = Math.floor(currentSecs % 60);
-                const ms = Math.floor((currentSecs % 1) * 100);
-                studioTime.textContent = `${mins}:${secs.toString().padStart(2, '0')}.${ms.toString().padStart(2, '0')} / 0:43.95`;
+            subtitles.push({ char, text });
+            document.getElementById('text-input').value = '';
+            renderSubtitles();
+        }
+
+        function renderSubtitles() {
+            const list = document.getElementById('sub-list');
+            list.innerHTML = '';
+            subtitles.forEach((sub, i) => {
+                const div = document.createElement('div');
+                div.className = 'subtitle-item';
+                div.innerHTML = `<span><b>${sub.char}:</b> ${sub.text}</span>`;
+                list.appendChild(div);
             });
         }
 
-        // Выделение эффектов
-        document.querySelectorAll('.studio-effect-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                btn.classList.toggle('active');
-            });
-        });
+        function clearAll() {
+            subtitles = [];
+            renderSubtitles();
+            window.speechSynthesis.cancel();
+            document.getElementById('sub-overlay').style.display = 'none';
+            document.getElementById('progress-bar').style.width = '0%';
+            document.getElementById('avatar').classList.remove('talking');
+        }
+
+        function playMesha() {
+            if (subtitles.length === 0) return alert('Сначала добавь реплики!');
+            if (isPlaying) {
+                window.speechSynthesis.cancel();
+                isPlaying = false;
+                document.getElementById('avatar').classList.remove('talking');
+                return;
+            }
+
+            isPlaying = true;
+            currentIndex = 0;
+            playNext();
+        }
+
+        function playNext() {
+            if (!isPlaying || currentIndex >= subtitles.length) {
+                isPlaying = false;
+                document.getElementById('avatar').classList.remove('talking');
+                document.getElementById('sub-overlay').style.display = 'none';
+                document.getElementById('progress-bar').style.width = '0%';
+                document.getElementById('time-display').textContent = '00:00';
+                return;
+            }
+
+            const sub = subtitles[currentIndex];
+            
+            // Показываем субтитры
+            const overlay = document.getElementById('sub-overlay');
+            overlay.style.display = 'block';
+            overlay.textContent = `${sub.char}: ${sub.text}`;
+
+            // Анимация
+            const avatar = document.getElementById('avatar');
+            avatar.classList.add('talking');
+            avatar.textContent = sub.char === 'Лунтик' ? '🐛' : (sub.char === 'Кузя' ? '🦗' : '🐞');
+
+            // Озвучка
+            const utterance = new SpeechSynthesisUtterance(sub.text);
+            utterance.lang = 'ru-RU';
+            utterance.rate = 1.0;
+            
+            // Прогресс-бар (визуальный)
+            const progress = document.getElementById('progress-bar');
+            progress.style.width = '100%';
+            progress.style.transition = 'none';
+            void progress.offsetWidth; 
+            progress.style.transition = 'width ' + (sub.text.length * 0.08) + 's linear';
+            progress.style.width = '0%';
+
+            utterance.onend = () => {
+                avatar.classList.remove('talking');
+                currentIndex++;
+                setTimeout(playNext, 500);
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
     </script>
 </body>
 </html>
