@@ -63,13 +63,11 @@
             font-family: 'Nunito', sans-serif; overflow: hidden;
         }
 
-        /* Верхняя панель */
         .studio-top-tabs { display: flex; background: #1a1a24; padding: 5px 15px; border-bottom: 1px solid #333; align-items: center; justify-content: space-between;}
         .studio-tab { background: #2a2a35; color: #fff; border: none; padding: 8px 16px; border-radius: 20px 20px 0 0; font-weight: 700; cursor: pointer; margin-right: 5px; }
         .studio-tab.active { background: #e23ea0; }
         .studio-close-btn { background: #ff4444; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; margin-left: 10px; }
 
-        /* Панель инструментов */
         .studio-toolbar { display: flex; align-items: center; gap: 10px; padding: 10px 15px; background: #22222e; border-bottom: 2px solid #111; flex-wrap: wrap; }
         .studio-btn { background: #3a3a4a; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
         .studio-btn:hover { background: #4a4a5a; }
@@ -80,7 +78,6 @@
         .toolbar-sliders { display: flex; align-items: center; gap: 15px; margin-left: auto; font-size: 0.8rem; color: #aaa; }
         .toolbar-sliders input { width: 80px; accent-color: #e23ea0; }
 
-        /* Рабочая область */
         .studio-workspace { display: flex; flex: 1; flex-direction: column; overflow: hidden; background: #15151a; }
         
         /* Превью с картинкой */
@@ -92,13 +89,21 @@
         .preview-media {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Картинка не обрежется */
+            object-fit: contain;
             display: block;
+            transition: transform 0.1s, filter 0.1s; /* Плавность для эффектов */
         }
 
-        .preview-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
-        }
+        /* Визуальные эффекты для картинки */
+        .fx-shake { animation: shake 0.15s infinite !important; }
+        .fx-glitch { animation: glitch 0.1s infinite !important; }
+        .fx-invert { filter: invert(1) hue-rotate(180deg) !important; }
+        .fx-noise { background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=='); background-size: 10px 10px; opacity: 0.8; }
+
+        @keyframes shake { 0% { transform: translate(2px, 1px) rotate(0deg); } 10% { transform: translate(-2px, -3px) rotate(-1deg); } 20% { transform: translate(-4px, 0px) rotate(1deg); } 30% { transform: translate(4px, 3px) rotate(0deg); } 40% { transform: translate(2px, -2px) rotate(1deg); } 50% { transform: translate(-2px, 3px) rotate(-1deg); } 60% { transform: translate(-4px, 2px) rotate(0deg); } 70% { transform: translate(4px, 2px) rotate(-1deg); } 80% { transform: translate(-2px, -2px) rotate(1deg); } 90% { transform: translate(2px, 3px) rotate(0deg); } 100% { transform: translate(2px, -3px) rotate(-1deg); } }
+        @keyframes glitch { 0% { clip-path: inset(20% 0 50% 0); transform: translate(-5px, 5px); } 20% { clip-path: inset(10% 0 80% 0); transform: translate(5px, -5px); } 40% { clip-path: inset(50% 0 20% 0); transform: translate(-5px, 0); } 60% { clip-path: inset(80% 0 10% 0); transform: translate(5px, 5px); } 80% { clip-path: inset(30% 0 40% 0); transform: translate(-5px, -5px); } 100% { clip-path: inset(20% 0 50% 0); transform: translate(0); } }
+
+        .preview-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
 
         /* Таймлайн */
         .studio-timeline-area { flex: 2.5; display: flex; overflow: hidden; background: #22222e; }
@@ -110,49 +115,38 @@
         .timeline-scroll { flex: 1; overflow-x: auto; overflow-y: hidden; position: relative; }
         .timeline-content { width: 2000px; height: 100%; display: flex; flex-direction: column; position: relative; }
 
-        /* Линейка */
         .time-ruler { height: 30px; border-bottom: 2px solid #444; display: flex; background: #1e1e24; position: relative; }
         .time-mark { width: 100px; border-right: 1px solid #333; font-size: 0.75rem; color: #aaa; padding-left: 5px; line-height: 30px; flex-shrink: 0; }
 
-        /* Дорожки */
         .track { height: 50px; border-bottom: 1px solid #333; position: relative; background: #1e1e24; }
         .track:hover { background: #23232c; }
         .track-grid { position: absolute; top:0; left:0; width:100%; height:100%; background-image: linear-gradient(90deg, transparent 99px, #333 100px); background-size: 100px 100%; pointer-events: none; }
 
-        /* Блоки (Эффекты, Субтитры) */
+        /* Блоки */
         .block {
             position: absolute; height: 30px; top: 10px; border-radius: 6px;
             display: flex; align-items: center; padding: 0 10px; font-size: 0.8rem; font-weight: 700;
-            color: #fff; cursor: pointer; white-space: nowrap; overflow: hidden; border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; cursor: grab; white-space: nowrap; overflow: hidden; border: 1px solid rgba(255,255,255,0.2);
             box-sizing: border-box;
         }
+        .block:active { cursor: grabbing; }
         .block-audio { background: linear-gradient(180deg, #ff6bff, #c2185b); opacity: 0.8; border-radius: 4px; }
         .block-sub { background: #9147ff; }
-        .block-effect { background: #e23ea0; border-radius: 6px; }
+        .block-effect { background: #e23ea0; }
 
-        /* Ручки для изменения размера (Trim Handles) */
+        /* Ручки для изменения размера */
         .resize-handle {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 10px;
-            cursor: ew-resize; /* Курсор влево-вправо */
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: absolute; top: 0; bottom: 0; width: 10px;
+            cursor: ew-resize; background-color: rgba(255, 255, 255, 0.2);
+            z-index: 10; display: flex; align-items: center; justify-content: center;
         }
         .resize-handle:hover { background-color: rgba(255, 255, 255, 0.5); }
         .resize-handle.left { left: 0; border-top-left-radius: 6px; border-bottom-left-radius: 6px; }
         .resize-handle.right { right: 0; border-top-right-radius: 6px; border-bottom-right-radius: 6px; }
         
-        /* Ползунок (Playhead) */
         .playhead { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; z-index: 20; pointer-events: none; box-shadow: 0 0 10px #fff; }
         .playhead::before { content: ''; position: absolute; top: 0; left: -5px; width: 12px; height: 12px; background: #fff; clip-path: polygon(50% 100%, 0 0, 100% 0); }
 
-        /* Панель эффектов */
         .effects-toolbar { display: flex; gap: 8px; padding: 8px 15px; background: #2a2a35; border-bottom: 1px solid #333; overflow-x: auto; }
         .effect-chip { background: #3a3a4a; color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer; border: 1px solid #555; white-space: nowrap; }
         .effect-chip:hover { background: #e23ea0; border-color: #e23ea0; }
@@ -196,20 +190,16 @@
     <!-- ================= СТУДИЯ ================= -->
     <div id="studio-interface">
         
-        <!-- Верхняя панель вкладок -->
         <div class="studio-top-tabs">
             <div>
                 <button class="studio-tab active">Монтаж</button>
-                <button class="studio-tab">Слои</button>
             </div>
             <div class="toolbar-sliders">
                 <span>Плеер <input type="range" min="0" max="100" value="80"></span>
-                <span>Монтаж <input type="range" min="0" max="100" value="80"></span>
                 <button class="studio-close-btn" onclick="closeStudio()">Выйти</button>
             </div>
         </div>
 
-        <!-- Панель инструментов -->
         <div class="studio-toolbar">
             <button class="studio-btn play" onclick="togglePlay()" id="play-btn">▶ Play</button>
             
@@ -226,7 +216,6 @@
             <button class="studio-btn" onclick="clearAll()" style="background:#ff4444;">Сброс</button>
         </div>
 
-        <!-- Панель добавления эффектов -->
         <div class="effects-toolbar" id="effects-palette">
             <span style="color:#aaa; font-size:0.8rem; align-self:center; margin-right:10px;">Добавить на дорожку:</span>
             <div class="effect-chip" onclick="addEffect('Тряска')">Тряска</div>
@@ -237,12 +226,10 @@
         </div>
 
         <div class="studio-workspace">
-            <!-- Превью видео с твоей картинкой -->
+            <!-- Превью видео -->
             <div class="studio-preview-area" id="preview-area">
-                <!-- Сюда подставляется твоя картинка -->
                 <img src="184706.png" class="preview-media" alt="Превью мешапа" id="preview-img">
                 
-                <!-- Оверлей для субтитров и эффектов -->
                 <div class="preview-overlay" id="preview-overlay">
                     <div id="sub-overlay" style="position:absolute; bottom:20px; width:100%; text-align:center; font-size:1.5rem; font-weight:800; color:white; text-shadow: 2px 2px 4px black; display:none;"></div>
                 </div>
@@ -251,7 +238,6 @@
             <!-- Таймлайн -->
             <div class="studio-timeline-area">
                 
-                <!-- Левая колонка -->
                 <div class="track-headers">
                     <div class="track-header time-header">время</div>
                     <div class="track-header" style="color:#ff6bff;">аудио</div>
@@ -261,29 +247,17 @@
                     <div class="track-header" style="color:#ffaa00;">Фильтры</div>
                 </div>
 
-                <!-- Правая скроллящаяся часть -->
                 <div class="timeline-scroll" id="timeline-scroll">
                     <div class="timeline-content" id="timeline-content">
                         
-                        <!-- Линейка -->
                         <div class="time-ruler" id="time-ruler"></div>
 
-                        <!-- Дорожка Аудио -->
                         <div class="track" id="track-audio"><div class="track-grid"></div></div>
-
-                        <!-- Дорожка Субтитров -->
                         <div class="track" id="track-subs"><div class="track-grid"></div></div>
-
-                        <!-- Дорожка Эффектов -->
                         <div class="track" id="track-effects"><div class="track-grid"></div></div>
-
-                        <!-- Дорожка Фона -->
                         <div class="track" id="track-bg"><div class="track-grid"></div></div>
-
-                        <!-- Дорожка Фильтров -->
                         <div class="track" id="track-filters"><div class="track-grid"></div></div>
 
-                        <!-- Ползунок (Плейхед) -->
                         <div class="playhead" id="playhead" style="left: 0px;"></div>
                     </div>
                 </div>
@@ -291,11 +265,9 @@
         </div>
     </div>
 
-    <!-- Аудио элемент -->
     <audio id="bg-audio"></audio>
 
     <script>
-        // ===== ВРЕМЯ СУТОК =====
         function updateTimeOfDay() {
             const hours = new Date().getHours();
             document.body.classList.remove('day', 'evening', 'night');
@@ -305,7 +277,6 @@
         }
         updateTimeOfDay(); setInterval(updateTimeOfDay, 60000);
 
-        // ===== СТУДИЯ =====
         const audio = document.getElementById('bg-audio');
         const timelineScroll = document.getElementById('timeline-scroll');
         const timelineContent = document.getElementById('timeline-content');
@@ -313,11 +284,15 @@
         const trackSubs = document.getElementById('track-subs');
         const trackEffects = document.getElementById('track-effects');
         const trackAudio = document.getElementById('track-audio');
+        const previewImg = document.getElementById('preview-img');
+        const subOverlay = document.getElementById('sub-overlay');
         
         const PIXELS_PER_SECOND = 50; 
         let isPlaying = false;
 
-        // Линейка времени
+        // Массив для хранения всех блоков на таймлайне
+        let timelineItems = []; 
+
         function initTimeRuler() {
             const ruler = document.getElementById('time-ruler');
             for (let i = 0; i <= 40; i++) {
@@ -357,19 +332,55 @@
                     document.getElementById('play-btn').textContent = '▶ Play';
                     document.getElementById('play-btn').style.background = '#e23ea0';
                 });
+
+                // ГЛАВНАЯ ЛОГИКА: При проигрывании проверяем эффекты и субтитры
                 audio.addEventListener('timeupdate', () => {
-                    const leftPos = audio.currentTime * PIXELS_PER_SECOND;
+                    const t = audio.currentTime;
+                    const leftPos = t * PIXELS_PER_SECOND;
                     playhead.style.left = leftPos + 'px';
+                    
                     if (leftPos > timelineScroll.scrollLeft + timelineScroll.clientWidth - 100) {
                         timelineScroll.scrollLeft = leftPos - 100;
+                    }
+
+                    // 1. Сбрасываем эффекты с картинки
+                    previewImg.className = 'preview-media';
+                    let activeSubText = '';
+
+                    // 2. Ищем активные блоки
+                    timelineItems.forEach(item => {
+                        const start = item.start;
+                        const end = item.start + item.duration;
+
+                        if (t >= start && t <= end) {
+                            if (item.type === 'subtitle') {
+                                activeSubText = item.text;
+                            } else if (item.type === 'effect') {
+                                if (item.name === 'Тряска') previewImg.classList.add('fx-shake');
+                                if (item.name === 'Глитч') previewImg.classList.add('fx-glitch');
+                                if (item.name === 'Инверсия') previewImg.classList.add('fx-invert');
+                                if (item.name === 'Шум') previewImg.classList.add('fx-noise');
+                                if (item.name === 'стоп эффекта') {
+                                    // Очищаем все эффекты
+                                    previewImg.className = 'preview-media';
+                                }
+                            }
+                        }
+                    });
+
+                    // 3. Отображаем субтитры
+                    if (activeSubText) {
+                        subOverlay.style.display = 'block';
+                        subOverlay.textContent = activeSubText;
+                    } else {
+                        subOverlay.style.display = 'none';
                     }
                 });
             }
         });
 
-        // Клик по таймлайну
         timelineScroll.addEventListener('click', (e) => {
-            if (!audio.src || e.target.classList.contains('resize-handle')) return; // Игнорируем клики по ручкам
+            if (!audio.src || e.target.classList.contains('resize-handle') || e.target.classList.contains('block')) return;
             const rect = timelineContent.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
             const time = Math.max(0, clickX / PIXELS_PER_SECOND);
@@ -377,7 +388,6 @@
             playhead.style.left = (time * PIXELS_PER_SECOND) + 'px';
         });
 
-        // Play/Pause
         function togglePlay() {
             if (!audio.src) return alert('Загрузи трек!');
             const btn = document.getElementById('play-btn');
@@ -393,51 +403,83 @@
             isPlaying = !isPlaying;
         }
 
-        // Добавление субтитра
         function addSubtitle() {
             const text = document.getElementById('text-input').value.trim();
             if (!text) return alert('Введи текст!');
             const currentTime = audio.currentTime || 0;
             
-            const block = createResizableBlock('block-sub', currentTime, 2, text);
+            const blockData = { type: 'subtitle', start: currentTime, duration: 2, text: text, element: null };
+            const block = createResizableBlock('block-sub', blockData, text);
             trackSubs.appendChild(block);
+            blockData.element = block;
+            timelineItems.push(blockData);
+            
             document.getElementById('text-input').value = '';
         }
 
-        // Добавление эффекта
         function addEffect(effectName) {
             const currentTime = audio.currentTime || 0;
-            const block = createResizableBlock('block-effect', currentTime, 2, effectName);
+            const blockData = { type: 'effect', name: effectName, start: currentTime, duration: 2, element: null };
+            const block = createResizableBlock('block-effect', blockData, effectName);
             trackEffects.appendChild(block);
+            blockData.element = block;
+            timelineItems.push(blockData);
         }
 
-        // Функция создания блока с ручками для изменения размера
-        function createResizableBlock(className, startTime, duration, text) {
+        // Создание блока с возможностью перемещения и изменения размера
+        function createResizableBlock(className, blockData, text) {
             const block = document.createElement('div');
             block.className = `block ${className}`;
-            block.style.left = (startTime * PIXELS_PER_SECOND) + 'px';
-            block.style.width = (duration * PIXELS_PER_SECOND) + 'px';
+            block.style.left = (blockData.start * PIXELS_PER_SECOND) + 'px';
+            block.style.width = (blockData.duration * PIXELS_PER_SECOND) + 'px';
             
-            // Левая ручка
             const handleLeft = document.createElement('div');
             handleLeft.className = 'resize-handle left';
             
-            // Правая ручка
             const handleRight = document.createElement('div');
             handleRight.className = 'resize-handle right';
 
-            // Текст блока
             const textSpan = document.createElement('span');
             textSpan.textContent = text;
-            textSpan.style.pointerEvents = 'none'; // Чтобы текст не мешал тянуть
+            textSpan.style.pointerEvents = 'none';
+            textSpan.style.width = '100%';
+            textSpan.style.textAlign = 'center';
+            textSpan.style.overflow = 'hidden';
+            textSpan.style.textOverflow = 'ellipsis';
 
             block.appendChild(handleLeft);
             block.appendChild(textSpan);
             block.appendChild(handleRight);
 
-            // Логика изменения размера
             let startX, startWidth, startLeft;
 
+            // --- ЛОГИКА ПЕРЕТАСКИВАНИЯ ВСЕГО БЛОКА ---
+            block.addEventListener('mousedown', (e) => {
+                if (e.target === handleLeft || e.target === handleRight) return; // Если тянем за ручки, игнорируем
+                e.stopPropagation();
+                
+                startX = e.clientX;
+                startLeft = parseInt(document.defaultView.getComputedStyle(block).left, 10);
+                
+                function doDrag(ev) {
+                    const deltaX = ev.clientX - startX;
+                    let newLeft = startLeft + deltaX;
+                    if (newLeft < 0) newLeft = 0;
+                    
+                    block.style.left = newLeft + 'px';
+                    blockData.start = newLeft / PIXELS_PER_SECOND;
+                }
+
+                function stopDrag() {
+                    document.removeEventListener('mousemove', doDrag);
+                    document.removeEventListener('mouseup', stopDrag);
+                }
+
+                document.addEventListener('mousemove', doDrag);
+                document.addEventListener('mouseup', stopDrag);
+            });
+
+            // --- ЛЕВАЯ РУЧКА (ИЗМЕНЕНИЕ НАЧАЛА И ШИРИНЫ) ---
             handleLeft.addEventListener('mousedown', (e) => {
                 e.stopPropagation();
                 startX = e.clientX;
@@ -460,6 +502,9 @@
                     
                     block.style.width = newWidth + 'px';
                     block.style.left = newLeft + 'px';
+                    
+                    blockData.start = newLeft / PIXELS_PER_SECOND;
+                    blockData.duration = newWidth / PIXELS_PER_SECOND;
                 }
 
                 function stopDrag() {
@@ -471,6 +516,7 @@
                 document.addEventListener('mouseup', stopDrag);
             });
 
+            // --- ПРАВАЯ РУЧКА (ИЗМЕНЕНИЕ ТОЛЬКО ШИРИНЫ) ---
             handleRight.addEventListener('mousedown', (e) => {
                 e.stopPropagation();
                 startX = e.clientX;
@@ -479,10 +525,10 @@
                 function doDrag(ev) {
                     const deltaX = ev.clientX - startX;
                     let newWidth = startWidth + deltaX;
-                    
                     if (newWidth < 20) newWidth = 20;
                     
                     block.style.width = newWidth + 'px';
+                    blockData.duration = newWidth / PIXELS_PER_SECOND;
                 }
 
                 function stopDrag() {
@@ -497,18 +543,6 @@
             return block;
         }
 
-        function speakText(text) {
-            if (window.speechSynthesis) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'ru-RU';
-                const overlay = document.getElementById('sub-overlay');
-                overlay.style.display = 'block';
-                overlay.textContent = text;
-                utterance.onend = () => { overlay.style.display = 'none'; };
-                window.speechSynthesis.speak(utterance);
-            }
-        }
-
         function clearAll() {
             if(!confirm('Очистить таймлайн?')) return;
             audio.pause(); audio.currentTime = 0; isPlaying = false;
@@ -517,15 +551,18 @@
             playhead.style.left = '0px';
             trackSubs.innerHTML = '<div class="track-grid"></div>';
             trackEffects.innerHTML = '<div class="track-grid"></div>';
-            window.speechSynthesis.cancel();
+            timelineItems = [];
+            previewImg.className = 'preview-media';
+            subOverlay.style.display = 'none';
         }
 
         function stopAll() {
             audio.pause();
             isPlaying = false;
-            window.speechSynthesis.cancel();
             document.getElementById('play-btn').textContent = '▶ Play';
             document.getElementById('play-btn').style.background = '#e23ea0';
+            previewImg.className = 'preview-media';
+            subOverlay.style.display = 'none';
         }
     </script>
 </body>
