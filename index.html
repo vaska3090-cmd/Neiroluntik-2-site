@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>НейроЛунтик 2 — Пародия</title>
     
-    <!-- ИКОНКА САЙТА (твоя картинка) -->
+    <!-- ИКОНКА САЙТА -->
     <link rel="icon" type="image/jpeg" href="channels4_profile (2).jpg">
 
     <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 
     <style>
-        /* ===== Сброс ===== */
+        /* ================= ОБЩИЕ СТИЛИ САЙТА ================= */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -66,10 +66,9 @@
         .sun, .moon { transition: all 1.5s ease; }
         .cloud, .grass, .flower { transition: opacity 1s ease, filter 1s ease, background 1s ease; }
 
-        /* ===== СОЛНЦЕ ===== */
+        /* ===== ФОНОВЫЕ ЭЛЕМЕНТЫ ===== */
         .sun { position: fixed; top: 40px; right: 60px; width: 100px; height: 100px; border-radius: 50%; z-index: 0; pointer-events: none; }
-
-        /* ===== ОБЛАКА ===== */
+        
         .cloud { position: fixed; border-radius: 100px; z-index: 0; pointer-events: none; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1)); }
         .cloud::before, .cloud::after { content: ''; position: absolute; background: inherit; border-radius: inherit; }
         .cloud-1 { width: 180px; height: 60px; top: 70px; left: 10%; animation: floatCloud 18s ease-in-out infinite alternate; }
@@ -83,68 +82,23 @@
         .cloud-3::after { width: 80px; height: 60px; top: -25px; left: 60px; }
         @keyframes floatCloud { 0% { transform: translateX(-30px); } 100% { transform: translateX(30px); } }
 
-        /* ===== ТРАВА ===== */
-        .grass { 
-            position: fixed; bottom: 0; left: 0; width: 100%; height: 100px; 
-            background: repeating-linear-gradient(90deg, #5DAE3E 0px, #4A8C2A 4px, #5DAE3E 8px, #4A8C2A 12px); 
-            clip-path: polygon(0% 40%, 10% 20%, 20% 50%, 30% 10%, 40% 60%, 50% 20%, 60% 50%, 70% 10%, 80% 60%, 90% 20%, 100% 40%, 100% 100%, 0% 100%); 
-            z-index: 1; pointer-events: none; 
-        }
+        .grass { position: fixed; bottom: 0; left: 0; width: 100%; height: 100px; background: repeating-linear-gradient(90deg, #5DAE3E 0px, #4A8C2A 4px, #5DAE3E 8px, #4A8C2A 12px); clip-path: polygon(0% 40%, 10% 20%, 20% 50%, 30% 10%, 40% 60%, 50% 20%, 60% 50%, 70% 10%, 80% 60%, 90% 20%, 100% 40%, 100% 100%, 0% 100%); z-index: 1; pointer-events: none; }
 
-        /* ===== ЦВЕТЫ ===== */
         .flower { position: fixed; z-index: 0; pointer-events: none; width: 60px; height: 140px; bottom: 30px; }
         .flower-1 { left: 8%; bottom: 40px; }
         .flower-2 { right: 12%; bottom: 60px; }
         .flower-3 { left: 30%; bottom: 20px; }
         .flower-4 { right: 30%; bottom: 50px; }
-        
-        .flower .stem {
-            position: absolute;
-            bottom: -50px; 
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 150px; 
-            background: linear-gradient(to right, #1B5E20, #2E7D32, #1B5E20);
-            border-radius: 3px;
-            z-index: 1;
-        }
-        .flower .petals {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 50px;
-            z-index: 2;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
-        }
-        .flower .petal {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            top: 15px;
-            left: 15px;
-        }
+        .flower .stem { position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); width: 6px; height: 150px; background: linear-gradient(to right, #1B5E20, #2E7D32, #1B5E20); border-radius: 3px; z-index: 1; }
+        .flower .petals { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; z-index: 2; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); }
+        .flower .petal { position: absolute; width: 20px; height: 20px; border-radius: 50%; top: 15px; left: 15px; }
         .flower .petal:nth-child(1) { transform: rotate(0deg) translateY(-15px); }
         .flower .petal:nth-child(2) { transform: rotate(60deg) translateY(-15px); }
         .flower .petal:nth-child(3) { transform: rotate(120deg) translateY(-15px); }
         .flower .petal:nth-child(4) { transform: rotate(180deg) translateY(-15px); }
         .flower .petal:nth-child(5) { transform: rotate(240deg) translateY(-15px); }
         .flower .petal:nth-child(6) { transform: rotate(300deg) translateY(-15px); }
-        
-        .flower .center {
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: radial-gradient(circle, #FFD700, #FFA000);
-            border-radius: 50%;
-            top: 17px;
-            left: 17px;
-            z-index: 3;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
+        .flower .center { position: absolute; width: 16px; height: 16px; background: radial-gradient(circle, #FFD700, #FFA000); border-radius: 50%; top: 17px; left: 17px; z-index: 3; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 
         .stars { display: none; }
 
@@ -159,29 +113,11 @@
         .reveal:nth-child(5) { animation-delay: 0.7s; }
         @keyframes fadeUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
 
-        /* ===== НОВЫЙ ТЕКСТ СВЕРХУ ===== */
-        .fan-disclaimer {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(6px);
-            padding: 10px 20px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            max-width: 90%;
-            line-height: 1.4;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: background 0.5s ease;
-        }
+        .fan-disclaimer { font-size: 0.9rem; font-weight: 700; color: #fff; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(6px); padding: 10px 20px; border-radius: 20px; margin-bottom: 20px; border: 1px solid rgba(255, 255, 255, 0.2); text-shadow: 0 2px 4px rgba(0,0,0,0.5); max-width: 90%; line-height: 1.4; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: background 0.5s ease; }
 
-        /* ===== ЛОГОТИП ===== */
         .hero { margin-bottom: 20px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(6px); padding: 16px 40px; border-radius: 60px; display: inline-block; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         .logo-text { font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif; font-weight: 900; font-size: clamp(2.8rem, 9vw, 5.2rem); color: #E91E63; text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(0,0,0,0.2); letter-spacing: 3px; line-height: 1.1; user-select: none; }
 
-        /* ===== ОПИСАНИЕ ===== */
         .about-box { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(6px); border-radius: 30px; padding: 20px 28px; margin-bottom: 28px; max-width: 700px; width: 100%; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         .about-box p { font-size: 1.05rem; line-height: 1.7; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.4); font-weight: 600; margin: 0; }
         .about-box .highlight { color: #FFD700; font-weight: 800; }
@@ -193,9 +129,7 @@
         .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 32px; width: 100%; }
         .btn { display: inline-flex; align-items: center; gap: 14px; padding: 14px 28px; border-radius: 60px; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1rem; color: #fff; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.5s ease, border 0.5s ease; border: none; cursor: pointer; min-width: 180px; justify-content: center; flex: 1 0 auto; max-width: 280px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.2); }
         .btn:hover { transform: scale(1.04); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); background: rgba(0, 0, 0, 0.6); }
-        
         .btn svg { width: 28px; height: 28px; fill: currentColor; flex-shrink: 0; }
-        
         .btn-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
         .btn-text b { font-size: 1.05rem; font-weight: 800; }
         .btn-text small { font-weight: 600; font-size: 0.75rem; opacity: 0.9; }
@@ -221,30 +155,159 @@
         .disclaimer a { color: #FFD700; text-decoration: none; }
         .disclaimer a:hover { text-decoration: underline; }
 
-        /* ===== МОДАЛЬНОЕ ОКНО СТУДИИ ===== */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
-        .modal-overlay.active { display: flex; opacity: 1; }
-        
-        .modal-content { background: linear-gradient(135deg, #1e1e24, #2a2a35); border: 2px solid #e23ea0; border-radius: 24px; padding: 30px; width: 90%; max-width: 500px; color: #fff; position: relative; box-shadow: 0 10px 50px rgba(226, 62, 160, 0.3); transform: translateY(20px); transition: transform 0.3s ease; text-align: center; }
-        .modal-overlay.active .modal-content { transform: translateY(0); }
-        
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #aaa; transition: color 0.2s; }
-        .close-modal:hover { color: #fff; }
-        
-        .modal-content h2 { font-family: 'Comic Sans MS', cursive; color: #e23ea0; margin-bottom: 20px; font-size: 1.8rem; }
-        .modal-content p { margin-bottom: 20px; color: #ccc; font-size: 1rem; }
-        
-        .studio-input { width: 100%; padding: 14px 20px; border-radius: 30px; border: 2px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: #fff; font-size: 1rem; outline: none; margin-bottom: 15px; font-family: 'Nunito', sans-serif; transition: border 0.3s; }
-        .studio-input:focus { border-color: #e23ea0; }
-        
-        .studio-submit { width: 100%; padding: 14px; border-radius: 30px; background: #e23ea0; color: #fff; border: none; font-size: 1.1rem; font-weight: 800; cursor: pointer; font-family: 'Nunito', sans-serif; transition: transform 0.2s, background 0.2s; }
-        .studio-submit:hover { background: #ff5eb8; transform: scale(1.02); }
+        /* ====================================================================
+           ИНТЕРФЕЙС СТУДИИ (ПОЛНОЭКРАННЫЙ)
+           ==================================================================== */
+        #studio-interface {
+            display: none; /* Скрыто по умолчанию */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0f0f13;
+            color: #e0e0e0;
+            z-index: 10000;
+            flex-direction: column;
+            font-family: 'Nunito', sans-serif;
+            overflow: hidden;
+        }
 
-        .studio-result { margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 15px; border: 1px dashed #e23ea0; display: none; }
-        .studio-result.active { display: block; }
-        .studio-result p { margin: 0; color: #fff; font-style: italic; }
+        /* Шапка студии */
+        .studio-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: #1a1a24;
+            border-bottom: 1px solid #333;
+        }
+        .studio-logo { font-family: 'Comic Sans MS', cursive; font-weight: 900; font-size: 1.2rem; color: #e23ea0; }
+        .studio-close-btn {
+            background: #e23ea0;
+            color: #fff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .studio-close-btn:hover { background: #ff5eb8; }
 
-        /* ===== АДАПТИВНОСТЬ ===== */
+        /* Панель инструментов */
+        .studio-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: #22222e;
+            border-bottom: 1px solid #333;
+            flex-wrap: wrap;
+        }
+        .studio-toolbar input[type="text"],
+        .studio-toolbar select,
+        .studio-toolbar input[type="number"] {
+            background: #2e2e3a;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .studio-toolbar input:focus, .studio-toolbar select:focus { border-color: #e23ea0; }
+        .studio-btn-sm {
+            background: #3a3a4a;
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .studio-btn-sm:hover { background: #4a4a5a; }
+
+        /* Основная область */
+        .studio-main {
+            display: flex;
+            flex: 1;
+            gap: 15px;
+            padding: 15px 20px;
+            overflow: hidden;
+        }
+
+        /* Левая панель */
+        .studio-sidebar-left {
+            width: 260px;
+            background: #1a1a24;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border: 1px solid #333;
+            overflow-y: auto;
+        }
+        .studio-tabs { display: flex; gap: 5px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .studio-tab { background: none; border: none; color: #888; font-weight: 700; font-size: 0.85rem; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+        .studio-tab.active { background: #2e2e3a; color: #fff; }
+        .studio-section-title { font-size: 0.75rem; text-transform: uppercase; color: #666; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; }
+        .studio-effect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .studio-effect-btn { background: #2e2e3a; border: 1px solid #444; color: #ccc; padding: 6px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; cursor: pointer; text-align: center; transition: 0.2s; }
+        .studio-effect-btn:hover { background: #3e3e4a; border-color: #e23ea0; color: #fff; }
+        .studio-effect-btn.active { background: #e23ea0; border-color: #e23ea0; color: #fff; }
+
+        /* Центральная область */
+        .studio-preview {
+            flex: 1;
+            background: #000;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 2px solid #333;
+            overflow: hidden;
+        }
+        .studio-preview-placeholder { text-align: center; color: #555; }
+        .studio-preview-placeholder h2 { font-size: 1.5rem; margin-bottom: 10px; color: #666; }
+        .studio-preview-placeholder p { font-size: 0.9rem; }
+
+        /* Правая панель */
+        .studio-sidebar-right {
+            width: 280px;
+            background: #1a1a24;
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+        }
+        .studio-sidebar-right h3 { font-size: 1rem; color: #fff; margin-bottom: 10px; }
+        .studio-sidebar-right p { font-size: 0.8rem; color: #888; line-height: 1.5; }
+
+        /* Таймлайн */
+        .studio-timeline {
+            background: #1a1a24;
+            border-top: 1px solid #333;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-height: 60px;
+        }
+        .studio-timeline-controls { display: flex; align-items: center; gap: 10px; color: #aaa; font-size: 0.85rem; }
+        .studio-timeline-track { flex: 1; height: 30px; background: #2e2e3a; border-radius: 6px; position: relative; overflow: hidden; cursor: pointer; }
+        .studio-timeline-progress { height: 100%; width: 0%; background: #e23ea0; border-radius: 6px; transition: width 0.1s; }
+        .studio-timeline-time { font-size: 0.85rem; color: #aaa; font-weight: 600; min-width: 100px; }
+
+        /* АДАПТИВНОСТЬ САЙТА */
         @media (max-width: 600px) {
             .wrap { padding: 24px 16px 20px; }
             .logo-text { font-size: clamp(2rem, 7vw, 3.2rem); }
@@ -266,18 +329,12 @@
             .flower-4 { display: none; }
             body.night .moon { width: 50px; height: 50px; top: 30px; right: 20px; }
             .fan-disclaimer { font-size: 0.75rem; padding: 8px 14px; }
-        }
-
-        @media (max-width: 420px) {
-            .btn { min-width: 120px; padding: 10px 14px; font-size: 0.8rem; gap: 8px; flex: 1 1 100%; }
-            .btn svg { width: 20px; height: 20px; }
-            .logo-text { font-size: 1.8rem; }
-            .about-box p { font-size: 0.85rem; }
+            .studio-sidebar-left, .studio-sidebar-right { display: none; }
         }
     </style>
 </head>
 <body>
-    <!-- ===== ФОНОВЫЕ ЭЛЕМЕНТЫ ===== -->
+    <!-- ===== ФОНОВЫЕ ЭЛЕМЕНТЫ САЙТА ===== -->
     <div class="sun" id="sun"></div>
     <div class="moon" id="moon"></div>
     <div class="stars" id="stars"></div>
@@ -288,61 +345,22 @@
 
     <!-- Цветы -->
     <div class="flower flower-1">
-        <div class="petals">
-            <div class="petal" style="background:#FF69B4;"></div>
-            <div class="petal" style="background:#FF69B4;"></div>
-            <div class="petal" style="background:#FF69B4;"></div>
-            <div class="petal" style="background:#FF69B4;"></div>
-            <div class="petal" style="background:#FF69B4;"></div>
-            <div class="petal" style="background:#FF69B4;"></div>
-            <div class="center"></div>
-        </div>
-        <div class="stem"></div>
+        <div class="petals"><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="petal" style="background:#FF69B4;"></div><div class="center"></div></div><div class="stem"></div>
     </div>
     <div class="flower flower-2">
-        <div class="petals">
-            <div class="petal" style="background:#FFFFFF;"></div>
-            <div class="petal" style="background:#FFFFFF;"></div>
-            <div class="petal" style="background:#FFFFFF;"></div>
-            <div class="petal" style="background:#FFFFFF;"></div>
-            <div class="petal" style="background:#FFFFFF;"></div>
-            <div class="petal" style="background:#FFFFFF;"></div>
-            <div class="center" style="background:#FFD700;"></div>
-        </div>
-        <div class="stem"></div>
+        <div class="petals"><div class="petal" style="background:#FFFFFF;"></div><div class="petal" style="background:#FFFFFF;"></div><div class="petal" style="background:#FFFFFF;"></div><div class="petal" style="background:#FFFFFF;"></div><div class="petal" style="background:#FFFFFF;"></div><div class="petal" style="background:#FFFFFF;"></div><div class="center" style="background:#FFD700;"></div></div><div class="stem"></div>
     </div>
     <div class="flower flower-3">
-        <div class="petals">
-            <div class="petal" style="background:#FF4500;"></div>
-            <div class="petal" style="background:#FF4500;"></div>
-            <div class="petal" style="background:#FF4500;"></div>
-            <div class="petal" style="background:#FF4500;"></div>
-            <div class="petal" style="background:#FF4500;"></div>
-            <div class="petal" style="background:#FF4500;"></div>
-            <div class="center" style="background:#FFA500;"></div>
-        </div>
-        <div class="stem"></div>
+        <div class="petals"><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="petal" style="background:#FF4500;"></div><div class="center" style="background:#FFA500;"></div></div><div class="stem"></div>
     </div>
     <div class="flower flower-4">
-        <div class="petals">
-            <div class="petal" style="background:#9370DB;"></div>
-            <div class="petal" style="background:#9370DB;"></div>
-            <div class="petal" style="background:#9370DB;"></div>
-            <div class="petal" style="background:#9370DB;"></div>
-            <div class="petal" style="background:#9370DB;"></div>
-            <div class="petal" style="background:#9370DB;"></div>
-            <div class="center" style="background:#FFD700;"></div>
-        </div>
-        <div class="stem"></div>
+        <div class="petals"><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="petal" style="background:#9370DB;"></div><div class="center" style="background:#FFD700;"></div></div><div class="stem"></div>
     </div>
 
-    <!-- Трава перекрывает нижнюю часть стеблей -->
     <div class="grass"></div>
 
-    <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
-    <main class="wrap">
-        
-        <!-- НОВЫЙ ТЕКСТ СВЕРХУ -->
+    <!-- ===== ОСНОВНОЙ КОНТЕНТ САЙТА ===== -->
+    <main class="wrap" id="main-page">
         <div class="fan-disclaimer reveal">
             НейроЛунтик 2 — Это мой фан-проект "НейроЛунтик 2". Я не присваиваю себе идею оригинального проекта.
         </div>
@@ -382,14 +400,13 @@
                 <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.5168 0-.1636-.3847-.3973-.8742-.6083-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
                 <span class="btn-text"><b>Discord</b><small>Войти в сервер</small></span>
             </a>
-            <!-- Кнопка Студии -->
-            <button class="btn btn-studio" id="openStudioBtn">
+            <!-- Кнопка Студии (вызывает JS функцию) -->
+            <button class="btn btn-studio" onclick="openStudio()">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2z"/></svg>
                 <span class="btn-text"><b>Студия</b><small>Создать мешап</small></span>
             </button>
         </nav>
 
-        <!-- Плеер Twitch -->
         <section class="player reveal">
             <div class="player-frame">
                 <iframe
@@ -402,7 +419,6 @@
             </div>
         </section>
 
-        <!-- Подвал -->
         <footer class="footer reveal">
             <p class="disclaimer">
                 Мы не ассоциируемся с CTB и студией «Мельница»
@@ -415,38 +431,142 @@
         </footer>
     </main>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО СТУДИИ ===== -->
-    <div class="modal-overlay" id="studioModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeStudioBtn">&times;</span>
-            <h2>Студия мешапов</h2>
-            <p>Выбери персонажа и напиши реплику, чтобы создать свой диалог!</p>
+    <!-- ====================================================================
+         ИНТЕРФЕЙС СТУДИИ (СКРЫТ ПО УМОЛЧАНИЮ)
+         ==================================================================== -->
+    <div id="studio-interface">
+        
+        <!-- Шапка студии -->
+        <header class="studio-header">
+            <div class="studio-logo">НЕЙРОЛУНТИК СТУДИЯ</div>
+            <button class="studio-close-btn" onclick="closeStudio()">Выйти на главную</button>
+        </header>
+
+        <!-- Панель инструментов студии -->
+        <div class="studio-toolbar">
+            <input type="text" placeholder="Название" style="width: 120px;">
+            <button class="studio-btn-sm">Новый</button>
+            <button class="studio-btn-sm">Открыть .vtt</button>
+            <button class="studio-btn-sm">Загрузить mp3</button>
+            <button class="studio-btn-sm">По ссылке</button>
+            <span style="color: #666; font-size: 0.8rem;">MONTAGEM_DOMER__SUPE... (3).mp3</span>
             
-            <select class="studio-input" id="studioCharacter">
-                <option value="Лунтик">Лунтик</option>
-                <option value="Кузя">Кузя</option>
-                <option value="Мила">Мила</option>
-                <option value="Пчелёнок">Пчелёнок</option>
-                <option value="Вупсень">Вупсень</option>
-                <option value="Пупсень">Пупсень</option>
+            <select>
+                <option>Тип: Дуэт-мешап</option>
+                <option>Тип: Соло-мешап</option>
             </select>
+            <select>
+                <option>Поёт: Кузя</option>
+                <option>Поёт: Лунтик</option>
+            </select>
+            <input type="number" placeholder="BPM" style="width: 60px;" value="120">
+            <button class="studio-btn-sm">Tan</button>
+            <label style="font-size: 0.8rem; color: #aaa; display: flex; align-items: center; gap: 5px;">
+                <input type="checkbox"> Без автокамеры
+            </label>
+            <button class="studio-btn-sm">Отвязать текст</button>
             
-            <input type="text" class="studio-input" id="studioText" placeholder="Напиши свою фразу...">
+            <button class="studio-btn-sm" style="background: #e23ea0; margin-left: auto;" onclick="alert('Мешап опубликован!')">Опубликовать</button>
+        </div>
+
+        <!-- Основная область студии -->
+        <div class="studio-main">
             
-            <button class="studio-submit" id="createStudioBtn">Создать мешап</button>
-            
-            <div class="studio-result" id="studioResult">
-                <p></p>
+            <!-- Левая панель -->
+            <aside class="studio-sidebar-left">
+                <div class="studio-tabs">
+                    <button class="studio-tab active">Библиотека</button>
+                    <button class="studio-tab">Реплики</button>
+                    <button class="studio-tab">VTT</button>
+                </div>
+
+                <div>
+                    <div class="studio-section-title">Субтитры</div>
+                    <button class="studio-btn-sm" style="width: 100%; text-align: left;">+ Реплика</button>
+                </div>
+
+                <div>
+                    <div class="studio-section-title">Эффекты экрана</div>
+                    <div class="studio-effect-grid">
+                        <button class="studio-effect-btn">Тряска экрана</button>
+                        <button class="studio-effect-btn">Покачивание</button>
+                        <button class="studio-effect-btn">Пикселизация</button>
+                        <button class="studio-effect-btn">Воронка</button>
+                        <button class="studio-effect-btn">Помехи строк</button>
+                        <button class="studio-effect-btn">Волны</button>
+                        <button class="studio-effect-btn">Искажение</button>
+                        <button class="studio-effect-btn">Глитч</button>
+                        <button class="studio-effect-btn">Неон-контур</button>
+                        <button class="studio-effect-btn">Ч/Б экран</button>
+                        <button class="studio-effect-btn">Шум</button>
+                        <button class="studio-effect-btn">Линии</button>
+                        <button class="studio-effect-btn">Полосы</button>
+                        <button class="studio-effect-btn">Туман</button>
+                        <button class="studio-effect-btn">■ стоп эффекта</button>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="studio-section-title">Фон</div>
+                    <div class="studio-effect-grid">
+                        <button class="studio-effect-btn">Белый резко</button>
+                        <button class="studio-effect-btn">Чёрный за 1с</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Центральная область (превью) -->
+            <section class="studio-preview">
+                <div class="studio-preview-placeholder">
+                    <h2>0:00.00 • камера: Основной</h2>
+                    <p>Здесь будет предпросмотр мешапа</p>
+                </div>
+            </section>
+
+            <!-- Правая панель -->
+            <aside class="studio-sidebar-right">
+                <h3>Ничего не выбрано</h3>
+                <p>
+                    Клик по реплике или событию на таймлайне — здесь появятся его настройки.
+                    <br><br>
+                    Двойной клик по дорожке «Субтитры» — новая реплика.
+                    <br><br>
+                    Пробел — play/pause.
+                    <br>
+                    N — реплика.
+                    <br>
+                    S — разрез.
+                    <br>
+                    Del — удалить.
+                </p>
+            </aside>
+        </div>
+
+        <!-- Таймлайн -->
+        <div class="studio-timeline">
+            <div class="studio-timeline-controls">
+                <span>⏮</span>
+                <span>◀ 5</span>
+                <span>▶</span>
+                <span>5 ▶</span>
+                <span class="studio-timeline-time" id="studio-time">0:00.00 / 0:43.95</span>
+            </div>
+            <div class="studio-timeline-track" id="studio-track">
+                <div class="studio-timeline-progress" id="studio-progress"></div>
+            </div>
+            <div class="studio-timeline-controls">
+                <span>Звук</span>
+                <input type="range" min="0" max="100" value="80" style="width: 80px; accent-color: #e23ea0;">
             </div>
         </div>
     </div>
 
+    <!-- ================= СКРИПТЫ ================= -->
     <script>
-        // ===== ГЕНЕРАЦИЯ ЗВЁЗД =====
+        // ===== УПРАВЛЕНИЕ ВРЕМЕНЕМ СУТОК =====
         function createStars() {
             const container = document.getElementById('stars');
-            const count = 150;
-            for (let i = 0; i < count; i++) {
+            for (let i = 0; i < 150; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 const size = Math.random() * 3 + 1;
@@ -461,65 +581,58 @@
         }
         createStars();
 
-        // ===== ОБНОВЛЕНИЕ ВРЕМЕНИ СУТОК =====
         function updateTimeOfDay() {
-            const now = new Date();
-            const hours = now.getHours();
+            const hours = new Date().getHours();
             const body = document.body;
             body.classList.remove('day', 'evening', 'night');
-            if (hours >= 7 && hours < 17) {
-                body.classList.add('day');
-            } else if (hours >= 17 && hours < 21) {
-                body.classList.add('evening');
-            } else {
-                body.classList.add('night');
-            }
+            if (hours >= 7 && hours < 17) body.classList.add('day');
+            else if (hours >= 17 && hours < 21) body.classList.add('evening');
+            else body.classList.add('night');
         }
         updateTimeOfDay();
         setInterval(updateTimeOfDay, 60000);
 
         // ===== ЛОГИКА СТУДИИ =====
-        const modal = document.getElementById('studioModal');
-        const openBtn = document.getElementById('openStudioBtn');
-        const closeBtn = document.getElementById('closeStudioBtn');
-        const createBtn = document.getElementById('createStudioBtn');
-        const characterSelect = document.getElementById('studioCharacter');
-        const textInput = document.getElementById('studioText');
-        const resultBox = document.getElementById('studioResult');
-        const resultText = resultBox.querySelector('p');
+        function openStudio() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('studio-interface').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Отключаем прокрутку
+        }
 
-        // Открытие окна
-        openBtn.addEventListener('click', () => {
-            modal.classList.add('active');
-            resultBox.classList.remove('active'); // Сброс результата
-            textInput.value = '';
-        });
+        function closeStudio() {
+            document.getElementById('main-page').style.display = 'flex';
+            document.getElementById('studio-interface').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Включаем прокрутку обратно
+        }
 
-        // Закрытие окна
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
+        // Демонстрация работы таймлайна в студии
+        const studioTrack = document.getElementById('studio-track');
+        const studioProgress = document.getElementById('studio-progress');
+        const studioTime = document.getElementById('studio-time');
+        let progressPercent = 0;
 
-        // Закрытие по клику вне окна
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-            }
-        });
+        if(studioTrack) {
+            studioTrack.addEventListener('click', (e) => {
+                const rect = studioTrack.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                progressPercent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+                studioProgress.style.width = progressPercent + '%';
+                
+                // Обновляем время (примерно)
+                const totalSecs = 43.95;
+                const currentSecs = (progressPercent / 100) * totalSecs;
+                const mins = Math.floor(currentSecs / 60);
+                const secs = Math.floor(currentSecs % 60);
+                const ms = Math.floor((currentSecs % 1) * 100);
+                studioTime.textContent = `${mins}:${secs.toString().padStart(2, '0')}.${ms.toString().padStart(2, '0')} / 0:43.95`;
+            });
+        }
 
-        // Создание мешапа
-        createBtn.addEventListener('click', () => {
-            const character = characterSelect.value;
-            const text = textInput.value.trim();
-
-            if (!text) {
-                alert('Пожалуйста, напиши фразу для мешапа!');
-                return;
-            }
-
-            // Формируем результат
-            resultText.textContent = `${character}: «${text}»`;
-            resultBox.classList.add('active');
+        // Выделение эффектов
+        document.querySelectorAll('.studio-effect-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+            });
         });
     </script>
 </body>
