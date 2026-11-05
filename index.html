@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>НейроЛунтик 2 — Студия мешапов</title>
+    <title>НейроЛунтик 2 — Студия</title>
     
     <link rel="icon" type="image/jpeg" href="channels4_profile (2).jpg">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 
     <style>
-        /* ================= ГЛАВНАЯ СТРАНИЦА (ФОН) ================= */
+        /* ================= ГЛАВНАЯ СТРАНИЦА ================= */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Nunito', sans-serif; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; position: relative; transition: background 1.5s ease;
@@ -56,74 +56,81 @@
         .disclaimer { font-size: 0.85rem; color: #fff; background: rgba(0, 0, 0, 0.3); padding: 16px; border-radius: 20px; }
         .disclaimer a { color: #FFD700; }
 
-        /* ================= СТУДИЯ (ИНТЕРФЕЙС) ================= */
+        /* ================= СТУДИЯ (КАК НА ФОТО) ================= */
         #studio-interface {
             display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #0f0f13; color: #e0e0e0; z-index: 10000; flex-direction: column;
+            background: #1e1e24; color: #e0e0e0; z-index: 10000; flex-direction: column;
             font-family: 'Nunito', sans-serif; overflow: hidden;
         }
 
-        .studio-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background: #1a1a24; border-bottom: 1px solid #333; }
-        .studio-logo { font-family: 'Comic Sans MS', cursive; font-weight: 900; font-size: 1.2rem; color: #e23ea0; }
-        .studio-close-btn { background: #e23ea0; color: #fff; border: none; padding: 6px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+        /* Верхняя панель вкладок */
+        .studio-top-tabs { display: flex; background: #1a1a24; padding: 5px 15px; border-bottom: 1px solid #333; align-items: center; justify-content: space-between;}
+        .studio-tab { background: #2a2a35; color: #fff; border: none; padding: 8px 16px; border-radius: 20px 20px 0 0; font-weight: 700; cursor: pointer; margin-right: 5px; }
+        .studio-tab.active { background: #e23ea0; }
+        .studio-close-btn { background: #ff4444; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; margin-left: 10px; }
 
-        .studio-toolbar { display: flex; align-items: center; gap: 10px; padding: 10px 20px; background: #22222e; border-bottom: 1px solid #333; flex-wrap: wrap; }
-        .studio-btn-sm { background: #3a3a4a; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
-        .studio-btn-sm:hover { background: #4a4a5a; }
-        .studio-toolbar select, .studio-toolbar input { background: #2e2e3a; border: 1px solid #444; color: #fff; padding: 6px 12px; border-radius: 6px; outline: none; }
-        
-        /* Скрываем стандартный инпут файла */
+        /* Панель инструментов */
+        .studio-toolbar { display: flex; align-items: center; gap: 10px; padding: 10px 15px; background: #22222e; border-bottom: 2px solid #111; flex-wrap: wrap; }
+        .studio-btn { background: #3a3a4a; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+        .studio-btn:hover { background: #4a4a5a; }
+        .studio-btn.play { background: #e23ea0; }
         .file-input-wrapper { position: relative; overflow: hidden; display: inline-block; }
         .file-input-wrapper input[type=file] { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; }
+        
+        .toolbar-sliders { display: flex; align-items: center; gap: 15px; margin-left: auto; font-size: 0.8rem; color: #aaa; }
+        .toolbar-sliders input { width: 80px; accent-color: #e23ea0; }
 
-        .studio-main { display: flex; flex: 1; gap: 15px; padding: 15px 20px; overflow: hidden; }
+        /* Основная рабочая область */
+        .studio-workspace { display: flex; flex: 1; flex-direction: column; overflow: hidden; background: #15151a; }
         
-        .studio-sidebar-left { width: 260px; background: #1a1a24; border-radius: 12px; padding: 15px; border: 1px solid #333; display: flex; flex-direction: column; gap: 10px; }
-        .studio-section-title { font-size: 0.75rem; text-transform: uppercase; color: #666; font-weight: 800; letter-spacing: 1px; margin-bottom: 5px; }
+        /* Верхняя часть (Видео-превью) */
+        .studio-preview-area { flex: 2; background: #000; display: flex; justify-content: center; align-items: center; position: relative; border-bottom: 2px solid #333; }
+        .preview-placeholder { color: #555; font-size: 1.5rem; font-weight: 700; }
+
+        /* Нижняя часть (Таймлайн) */
+        .studio-timeline-area { flex: 3; display: flex; overflow: hidden; background: #22222e; }
         
-        .studio-preview { flex: 1; background: #000; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 2px solid #333; overflow: hidden; }
+        /* Левая колонка с названиями дорожек */
+        .track-headers { width: 120px; background: #1a1a24; border-right: 1px solid #333; display: flex; flex-direction: column; z-index: 10; }
+        .track-header { height: 50px; border-bottom: 1px solid #333; display: flex; align-items: center; padding-left: 10px; font-size: 0.85rem; font-weight: 700; color: #fff; border-left: 4px solid transparent; }
+        .track-header.time-header { height: 30px; border-bottom: 2px solid #444; background: #1e1e24; }
         
-        .character-avatar {
-            width: 120px; height: 120px; background: #e23ea0; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 60px; transition: transform 0.1s; position: relative; z-index: 2;
+        /* Правая часть (Скроллящийся таймлайн) */
+        .timeline-scroll { flex: 1; overflow-x: auto; overflow-y: hidden; position: relative; }
+        .timeline-content { width: 2000px; height: 100%; display: flex; flex-direction: column; position: relative; }
+
+        /* Линейка времени */
+        .time-ruler { height: 30px; border-bottom: 2px solid #444; display: flex; background: #1e1e24; position: relative; }
+        .time-mark { width: 100px; border-right: 1px solid #333; font-size: 0.75rem; color: #aaa; padding-left: 5px; line-height: 30px; flex-shrink: 0; }
+
+        /* Дорожки */
+        .track { height: 50px; border-bottom: 1px solid #333; position: relative; background: #1e1e24; }
+        .track:hover { background: #23232c; }
+        .track-grid { position: absolute; top:0; left:0; width:100%; height:100%; background-image: linear-gradient(90deg, transparent 99px, #333 100px); background-size: 100px 100%; pointer-events: none; }
+
+        /* Блоки на дорожках */
+        .block {
+            position: absolute; height: 30px; top: 10px; border-radius: 6px;
+            display: flex; align-items: center; padding: 0 10px; font-size: 0.8rem; font-weight: 700;
+            color: #fff; cursor: pointer; white-space: nowrap; overflow: hidden; border: 1px solid rgba(255,255,255,0.2);
         }
-        .character-avatar.talking { animation: bounce 0.2s infinite alternate; }
-        .character-avatar::after {
-            content: ''; position: absolute; bottom: 30px; width: 40px; height: 10px;
-            background: #000; border-radius: 50%; transition: height 0.1s;
-        }
-        .character-avatar.talking::after { height: 30px; border-radius: 10px; animation: mouthMove 0.2s infinite alternate; }
+        .block-audio { background: linear-gradient(180deg, #ff6bff, #c2185b); opacity: 0.8; border-radius: 4px; }
+        .block-sub { background: #e23ea0; }
+        .block-effect { background: #d81b60; border-radius: 20px; }
         
-        @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-10px); } }
-        @keyframes mouthMove { from { height: 10px; } to { height: 30px; } }
+        /* Ползунок (Playhead) */
+        .playhead { position: absolute; top: 0; bottom: 0; width: 2px; background: #e23ea0; z-index: 20; pointer-events: none; box-shadow: 0 0 10px #e23ea0; }
+        .playhead::before { content: ''; position: absolute; top: 0; left: -5px; width: 12px; height: 12px; background: #e23ea0; clip-path: polygon(50% 100%, 0 0, 100% 0); }
 
-        /* Эффекты экрана */
-        .effect-shake { animation: shake 0.2s infinite; }
-        .effect-invert { filter: invert(1); background: #fff !important; }
-        .effect-glitch { animation: glitch 0.1s infinite; }
-        @keyframes shake { 0% { transform: translate(1px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(3px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(3px, 1px) rotate(-1deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(1px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
-        @keyframes glitch { 0% { clip-path: inset(10% 0 30% 0); transform: translate(-2px, 2px); } 20% { clip-path: inset(40% 0 20% 0); transform: translate(2px, -2px); } 40% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, 0); } 60% { clip-path: inset(60% 0 10% 0); transform: translate(2px, 2px); } 80% { clip-path: inset(30% 0 40% 0); transform: translate(-2px, -2px); } 100% { clip-path: inset(10% 0 30% 0); transform: translate(0); } }
-
-        .studio-subtitles-overlay { position: absolute; bottom: 20px; width: 80%; background: rgba(0,0,0,0.7); padding: 10px; text-align: center; font-size: 1.2rem; border-radius: 8px; border: 1px solid #444; display: none; z-index: 3; }
-
-        .studio-sidebar-right { width: 280px; background: #1a1a24; border-radius: 12px; padding: 15px; border: 1px solid #333; overflow-y: auto; }
-        .subtitle-item { background: #2e2e3a; padding: 8px; border-radius: 6px; margin-bottom: 6px; font-size: 0.85rem; display: flex; justify-content: space-between; border-left: 3px solid #e23ea0; }
-
-        .studio-timeline { background: #1a1a24; border-top: 1px solid #333; padding: 15px 20px; display: flex; align-items: center; gap: 15px; }
-        .studio-timeline-track { flex: 1; height: 20px; background: #2e2e3a; border-radius: 4px; position: relative; overflow: hidden; cursor: pointer; }
-        .studio-timeline-progress { height: 100%; width: 0%; background: #e23ea0; transition: width 0.1s linear; }
-        .studio-time { font-weight: 700; color: #e23ea0; font-family: monospace; font-size: 1rem; }
-
-        /* Эффекты */
-        .effect-btn { background: #2e2e3a; border: 1px solid #444; color: #ccc; padding: 6px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; text-align: center; transition: 0.2s; margin-bottom: 5px; }
-        .effect-btn:hover { background: #3e3e4a; }
-        .effect-btn.active { background: #e23ea0; border-color: #e23ea0; color: #fff; }
+        /* Верхняя полоска для добавления эффектов */
+        .effects-toolbar { display: flex; gap: 8px; padding: 8px 15px; background: #2a2a35; border-bottom: 1px solid #333; overflow-x: auto; }
+        .effect-chip { background: #3a3a4a; color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer; border: 1px solid #555; white-space: nowrap; }
+        .effect-chip:hover { background: #e23ea0; border-color: #e23ea0; }
 
         @media (max-width: 768px) {
-            .studio-sidebar-left, .studio-sidebar-right { display: none; }
-            .about-box { padding: 15px; } .logo-text { font-size: 2rem; }
-            .flower { transform: scale(0.7); } .flower-3, .flower-4 { display: none; }
+            .track-headers { width: 80px; } .track-header { font-size: 0.7rem; padding-left: 5px; }
+            .logo-text { font-size: 2rem; } .flower-3, .flower-4 { display: none; }
+            .studio-toolbar { padding: 5px; } .studio-btn { padding: 4px 8px; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -138,7 +145,7 @@
 
     <!-- ГЛАВНАЯ -->
     <main class="wrap" id="main-page">
-        <div class="fan-disclaimer">НейроЛунтик 2 — Это мой фан-проект "НейроЛунтик 2". Я не присваиваю себе идею оригинального проекта.</div>
+        <div class="fan-disclaimer">НейроЛунтик 2 — Это мой фан-проект. Я не присваиваю себе идею оригинального проекта.</div>
         <header class="hero"><div class="logo-text">НейроЛунтик 2</div></header>
         <section class="about-box">
             <p><strong class="pink">Я пародия на НейроЛунтика!</strong> Стримлю на <strong class="twitch-color">Twitch</strong>.<br>
@@ -158,62 +165,107 @@
 
     <!-- ================= СТУДИЯ ================= -->
     <div id="studio-interface">
-        <header class="studio-header"><div class="studio-logo">НЕЙРОЛУНТИК СТУДИЯ</div><button class="studio-close-btn" onclick="closeStudio()">Выйти на главную</button></header>
         
+        <!-- Верхняя панель вкладок -->
+        <div class="studio-top-tabs">
+            <div>
+                <button class="studio-tab active">Монтаж</button>
+                <button class="studio-tab">Слои</button>
+            </div>
+            <div class="toolbar-sliders">
+                <span>Плеер <input type="range" min="0" max="100" value="80"></span>
+                <span>Монтаж <input type="range" min="0" max="100" value="80"></span>
+                <button class="studio-close-btn" onclick="closeStudio()">Выйти</button>
+            </div>
+        </div>
+
+        <!-- Панель инструментов -->
         <div class="studio-toolbar">
-            <!-- Кнопки управления -->
-            <button class="studio-btn-sm" style="background:#e23ea0;" onclick="togglePlay()" id="play-btn">▶ Play</button>
+            <button class="studio-btn play" onclick="togglePlay()" id="play-btn">▶ Play</button>
             
-            <!-- Загрузка трека -->
             <div class="file-input-wrapper">
-                <button class="studio-btn-sm">🎵 Загрузить трек</button>
+                <button class="studio-btn">🎵 Загрузить трек</button>
                 <input type="file" id="audio-upload" accept="audio/*">
             </div>
             <span id="audio-name" style="color:#aaa; font-size:0.85rem;">Трек не выбран</span>
             
-            <!-- Выбор персонажа и ввод -->
-            <select id="char-select" style="margin-left:auto;">
-                <option value="Кузя">Поёт: Кузя</option>
-                <option value="Лунтик">Поёт: Лунтик</option>
-                <option value="Мила">Поёт: Мила</option>
-                <option value="Пчелёнок">Поёт: Пчелёнок</option>
-            </select>
-            <input type="text" id="text-input" placeholder="Текст реплики..." style="flex:1; min-width:150px;">
-            <button class="studio-btn-sm" onclick="addSubtitle()">+ Добавить</button>
-            <button class="studio-btn-sm" style="background:#ff4444;" onclick="clearAll()">Очистить</button>
-        </div>
-
-        <div class="studio-main">
-            <!-- Библиотека / Эффекты -->
-            <aside class="studio-sidebar-left">
-                <div class="studio-section-title">Эффекты экрана</div>
-                <button class="effect-btn" onclick="toggleEffect(this, 'effect-shake')">Тряска</button>
-                <button class="effect-btn" onclick="toggleEffect(this, 'effect-invert')">Инверсия</button>
-                <button class="effect-btn" onclick="toggleEffect(this, 'effect-glitch')">Глитч</button>
-                
-                <div class="studio-section-title" style="margin-top:15px;">Инфо</div>
-                <p style="font-size:0.8rem; color:#888;">1. Загрузи трек.<br>2. Введи реплику и нажми "+ Добавить".<br>3. Нажми Play. Голос заговорит поверх музыки.</p>
-            </aside>
-
-            <!-- Превью -->
-            <section class="studio-preview" id="preview-area">
-                <div class="character-avatar" id="avatar">🤖</div>
-                <div class="studio-subtitles-overlay" id="sub-overlay">...</div>
-            </section>
-
-            <!-- Список реплик -->
-            <aside class="studio-sidebar-right">
-                <div class="studio-section-title">Твои реплики</div>
-                <div id="sub-list"></div>
-            </aside>
-        </div>
-
-        <!-- Таймлайн -->
-        <div class="studio-timeline">
-            <div class="studio-timeline-track" id="timeline-track">
-                <div class="studio-timeline-progress" id="progress-bar"></div>
+            <div style="flex:1; min-width:150px;">
+                <input type="text" id="text-input" placeholder="Текст субтитра..." style="width:100%; background:#2e2e3a; border:1px solid #444; color:#fff; padding:6px 12px; border-radius:6px;">
             </div>
-            <div class="studio-time" id="time-display">00:00 / 00:00</div>
+            <button class="studio-btn" onclick="addSubtitle()" style="background:#9147ff;">+ Субтитр</button>
+            <button class="studio-btn" onclick="clearAll()" style="background:#ff4444;">Сброс</button>
+        </div>
+
+        <!-- Панель добавления эффектов (как на фото снизу) -->
+        <div class="effects-toolbar" id="effects-palette">
+            <span style="color:#aaa; font-size:0.8rem; align-self:center; margin-right:10px;">Добавить на дорожку:</span>
+            <div class="effect-chip" onclick="addEffect('Тряска')">Тряска</div>
+            <div class="effect-chip" onclick="addEffect('Глитч')">Глитч</div>
+            <div class="effect-chip" onclick="addEffect('Инверсия')">Инверсия</div>
+            <div class="effect-chip" onclick="addEffect('Шум')">Шум</div>
+            <div class="effect-chip" onclick="addEffect('стоп эффекта')">■ стоп эффекта</div>
+        </div>
+
+        <div class="studio-workspace">
+            <!-- Видео превью -->
+            <div class="studio-preview-area" id="preview-area">
+                <div class="preview-placeholder">Превью видео (3D сцена)</div>
+                <div id="sub-overlay" style="position:absolute; bottom:20px; background:rgba(0,0,0,0.7); padding:10px 20px; border-radius:8px; font-size:1.5rem; display:none;"></div>
+            </div>
+
+            <!-- Таймлайн -->
+            <div class="studio-timeline-area">
+                
+                <!-- Левая колонка -->
+                <div class="track-headers">
+                    <div class="track-header time-header">время</div>
+                    <div class="track-header" style="color:#ff6bff;">аудио</div>
+                    <div class="track-header" style="color:#fff;">Субтитры</div>
+                    <div class="track-header" style="color:#d81b60;">Эффекты</div>
+                    <div class="track-header" style="color:#666;">Фон</div>
+                    <div class="track-header" style="color:#ffaa00;">Фильтры</div>
+                </div>
+
+                <!-- Правая скроллящаяся часть -->
+                <div class="timeline-scroll" id="timeline-scroll">
+                    <div class="timeline-content" id="timeline-content">
+                        
+                        <!-- Линейка -->
+                        <div class="time-ruler" id="time-ruler">
+                            <!-- Заполняется JS -->
+                        </div>
+
+                        <!-- Дорожка Аудио -->
+                        <div class="track" id="track-audio">
+                            <div class="track-grid"></div>
+                            <!-- Сюда добавится аудио-волна -->
+                        </div>
+
+                        <!-- Дорожка Субтитров -->
+                        <div class="track" id="track-subs">
+                            <div class="track-grid"></div>
+                        </div>
+
+                        <!-- Дорожка Эффектов -->
+                        <div class="track" id="track-effects">
+                            <div class="track-grid"></div>
+                        </div>
+
+                        <!-- Дорожка Фона -->
+                        <div class="track" id="track-bg">
+                            <div class="track-grid"></div>
+                        </div>
+
+                        <!-- Дорожка Фильтров -->
+                        <div class="track" id="track-filters">
+                            <div class="track-grid"></div>
+                        </div>
+
+                        <!-- Ползунок (Плейхед) -->
+                        <div class="playhead" id="playhead" style="left: 0px;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -233,18 +285,35 @@
 
         // ===== СТУДИЯ =====
         const audio = document.getElementById('bg-audio');
-        let subtitles = [];
+        const timelineScroll = document.getElementById('timeline-scroll');
+        const timelineContent = document.getElementById('timeline-content');
+        const playhead = document.getElementById('playhead');
+        const trackSubs = document.getElementById('track-subs');
+        const trackEffects = document.getElementById('track-effects');
+        const trackAudio = document.getElementById('track-audio');
+        
+        // Настройки таймлайна
+        const PIXELS_PER_SECOND = 50; // 50 пикселей = 1 секунда
         let isPlaying = false;
-        let subtitleTimeouts = [];
-        let currentEffects = new Set();
+
+        // Создаем линейку времени (0:00, 0:01, 0:02...)
+        function initTimeRuler() {
+            const ruler = document.getElementById('time-ruler');
+            for (let i = 0; i <= 40; i++) { // на 40 секунд
+                const mark = document.createElement('div');
+                mark.className = 'time-mark';
+                const m = Math.floor(i / 60);
+                const s = i % 60;
+                mark.textContent = `00:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+                mark.style.width = (PIXELS_PER_SECOND * 1) + 'px'; // Каждое деление = 1 секунда
+                ruler.appendChild(mark);
+            }
+            timelineContent.style.width = (40 * PIXELS_PER_SECOND) + 'px';
+        }
+        initTimeRuler();
 
         function openStudio() { document.getElementById('main-page').style.display = 'none'; document.getElementById('studio-interface').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-        function closeStudio() { 
-            document.getElementById('main-page').style.display = 'flex'; 
-            document.getElementById('studio-interface').style.display = 'none'; 
-            document.body.style.overflow = 'auto'; 
-            stopAll(); 
-        }
+        function closeStudio() { document.getElementById('main-page').style.display = 'flex'; document.getElementById('studio-interface').style.display = 'none'; document.body.style.overflow = 'auto'; stopAll(); }
 
         // Загрузка аудио
         document.getElementById('audio-upload').addEventListener('change', function(e) {
@@ -252,157 +321,152 @@
             if (file) {
                 audio.src = URL.createObjectURL(file);
                 document.getElementById('audio-name').textContent = file.name;
-                audio.addEventListener('loadedmetadata', () => {
-                    updateTimeDisplay(0, audio.duration);
-                });
+                
+                // Визуализация аудио (фейковая полоска, так как реальная волна - это сложно)
+                trackAudio.innerHTML = '<div class="track-grid"></div>';
+                const audioBlock = document.createElement('div');
+                audioBlock.className = 'block block-audio';
+                audioBlock.style.width = '100%';
+                audioBlock.style.left = '0';
+                audioBlock.style.background = 'repeating-linear-gradient(90deg, #ff6bff, #ff6bff 2px, transparent 2px, transparent 4px)';
+                audioBlock.style.opacity = '0.6';
+                trackAudio.appendChild(audioBlock);
+                
                 audio.addEventListener('ended', () => {
                     isPlaying = false;
                     document.getElementById('play-btn').textContent = '▶ Play';
                     document.getElementById('play-btn').style.background = '#e23ea0';
-                    document.getElementById('avatar').classList.remove('talking');
                 });
                 audio.addEventListener('timeupdate', () => {
-                    if (audio.duration) {
-                        const percent = (audio.currentTime / audio.duration) * 100;
-                        document.getElementById('progress-bar').style.width = percent + '%';
-                        updateTimeDisplay(audio.currentTime, audio.duration);
+                    const leftPos = audio.currentTime * PIXELS_PER_SECOND;
+                    playhead.style.left = leftPos + 'px';
+                    
+                    // Автоскролл за ползунком
+                    if (leftPos > timelineScroll.scrollLeft + timelineScroll.clientWidth - 100) {
+                        timelineScroll.scrollLeft = leftPos - 100;
                     }
                 });
             }
         });
 
-        function updateTimeDisplay(current, total) {
-            const format = (sec) => {
-                const m = Math.floor(sec / 60);
-                const s = Math.floor(sec % 60);
-                return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            };
-            document.getElementById('time-display').textContent = `${format(current)} / ${format(total || 0)}`;
-        }
+        // Клик по таймлайну (перемотка)
+        timelineScroll.addEventListener('click', (e) => {
+            if (!audio.src) return;
+            const rect = timelineContent.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const time = Math.max(0, clickX / PIXELS_PER_SECOND);
+            audio.currentTime = time;
+            playhead.style.left = (time * PIXELS_PER_SECOND) + 'px';
+        });
 
-        // Управление воспроизведением
+        // Play/Pause
         function togglePlay() {
-            if (!audio.src) return alert('Сначала загрузи трек!');
-            if (subtitles.length === 0) return alert('Добавь хотя бы одну реплику!');
-
+            if (!audio.src) return alert('Загрузи трек!');
             const btn = document.getElementById('play-btn');
             if (isPlaying) {
                 audio.pause();
-                window.speechSynthesis.cancel();
-                clearTimeouts();
                 btn.textContent = '▶ Play';
                 btn.style.background = '#e23ea0';
-                document.getElementById('avatar').classList.remove('talking');
-                document.getElementById('sub-overlay').style.display = 'none';
             } else {
-                audio.currentTime = 0;
                 audio.play();
                 btn.textContent = '⏸ Пауза';
                 btn.style.background = '#ff4444';
-                startSubtitles();
             }
             isPlaying = !isPlaying;
         }
 
-        function clearTimeouts() {
-            subtitleTimeouts.forEach(t => clearTimeout(t));
-            subtitleTimeouts = [];
-        }
-
-        // Запуск реплик по таймеру
-        function startSubtitles() {
-            clearTimeouts();
-            subtitles.forEach((sub, index) => {
-                // Распределяем реплики равномерно по длительности трека (для демо)
-                const delay = (audio.duration / (subtitles.length + 1)) * (index + 1) * 1000;
-                const timeout = setTimeout(() => {
-                    if (!isPlaying) return;
-                    playSubtitle(sub);
-                }, delay);
-                subtitleTimeouts.push(timeout);
-            });
-        }
-
-        function playSubtitle(sub) {
-            const overlay = document.getElementById('sub-overlay');
-            const avatar = document.getElementById('avatar');
-            
-            overlay.style.display = 'block';
-            overlay.textContent = `${sub.char}: ${sub.text}`;
-            avatar.classList.add('talking');
-            avatar.textContent = sub.char === 'Лунтик' ? '🐛' : (sub.char === 'Кузя' ? '🦗' : '🐞');
-
-            const utterance = new SpeechSynthesisUtterance(sub.text);
-            utterance.lang = 'ru-RU';
-            utterance.rate = 1.0;
-            utterance.pitch = sub.char === 'Лунтик' ? 1.4 : (sub.char === 'Кузя' ? 1.2 : 1.0);
-
-            utterance.onend = () => {
-                avatar.classList.remove('talking');
-            };
-
-            window.speechSynthesis.speak(utterance);
-        }
-
-        // Добавление реплики
+        // Добавление субтитра
         function addSubtitle() {
             const text = document.getElementById('text-input').value.trim();
-            const char = document.getElementById('char-select').value;
             if (!text) return alert('Введи текст!');
-            subtitles.push({ char, text });
+
+            // Получаем текущее время ползунка
+            const currentTime = audio.currentTime || 0;
+            
+            const block = document.createElement('div');
+            block.className = 'block block-sub';
+            block.style.left = (currentTime * PIXELS_PER_SECOND) + 'px';
+            
+            // Длина блока зависит от текста
+            const duration = Math.max(2, text.length * 0.1); // минимум 2 секунды
+            block.style.width = (duration * PIXELS_PER_SECOND) + 'px';
+            block.textContent = text;
+
+            // Добавляем на дорожку
+            trackSubs.appendChild(block);
             document.getElementById('text-input').value = '';
-            renderSubtitles();
+
+            // Привязываем звук к этому блоку (воспроизведем при прохождении)
+            setTimeout(() => {
+                if (audio.currentTime >= currentTime && audio.currentTime < currentTime + duration) {
+                    speakText(text);
+                }
+            }, 100); // Упрощенная логика
         }
 
-        function renderSubtitles() {
-            const list = document.getElementById('sub-list');
-            list.innerHTML = '';
-            subtitles.forEach((sub, i) => {
-                const div = document.createElement('div');
-                div.className = 'subtitle-item';
-                div.innerHTML = `<span><b>${sub.char}:</b> ${sub.text}</span>`;
-                list.appendChild(div);
-            });
+        // Добавление эффекта
+        function addEffect(effectName) {
+            const currentTime = audio.currentTime || 0;
+            
+            const block = document.createElement('div');
+            block.className = 'block block-effect';
+            block.style.left = (currentTime * PIXELS_PER_SECOND) + 'px';
+            block.style.width = '80px'; // Эффекты короткие
+            block.textContent = effectName;
+
+            // Добавляем на дорожку
+            trackEffects.appendChild(block);
+
+            // Визуальный эффект (если нажали Play и ползунок прошел)
+            if (effectName === 'Тряска') document.getElementById('preview-area').classList.add('effect-shake');
+            if (effectName === 'Инверсия') document.getElementById('preview-area').classList.add('effect-invert');
+            if (effectName === 'Глитч') document.getElementById('preview-area').classList.add('effect-glitch');
+            if (effectName === 'Шум') document.getElementById('preview-area').style.background = 'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==")';
         }
 
-        function clearAll() {
-            subtitles = [];
-            renderSubtitles();
-            audio.pause();
-            audio.currentTime = 0;
-            isPlaying = false;
-            window.speechSynthesis.cancel();
-            clearTimeouts();
-            document.getElementById('play-btn').textContent = '▶ Play';
-            document.getElementById('play-btn').style.background = '#e23ea0';
-            document.getElementById('sub-overlay').style.display = 'none';
-            document.getElementById('progress-bar').style.width = '0%';
-            document.getElementById('time-display').textContent = '00:00 / 00:00';
-            document.getElementById('avatar').classList.remove('talking');
-        }
-
-        // Эффекты
-        function toggleEffect(btn, className) {
-            const preview = document.getElementById('preview-area');
-            if (currentEffects.has(className)) {
-                currentEffects.delete(className);
-                preview.classList.remove(className);
-                btn.classList.remove('active');
-            } else {
-                currentEffects.add(className);
-                preview.classList.add(className);
-                btn.classList.add('active');
+        function speakText(text) {
+            if (window.speechSynthesis) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ru-RU';
+                const overlay = document.getElementById('sub-overlay');
+                overlay.style.display = 'block';
+                overlay.textContent = text;
+                utterance.onend = () => { overlay.style.display = 'none'; };
+                window.speechSynthesis.speak(utterance);
             }
         }
 
-        // Клик по таймлайну
-        document.getElementById('timeline-track').addEventListener('click', (e) => {
-            if (!audio.src || !audio.duration) return;
-            const rect = e.currentTarget.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const percent = x / rect.width;
-            audio.currentTime = percent * audio.duration;
-        });
+        function clearAll() {
+            if(!confirm('Очистить таймлайн?')) return;
+            audio.pause(); audio.currentTime = 0; isPlaying = false;
+            document.getElementById('play-btn').textContent = '▶ Play';
+            document.getElementById('play-btn').style.background = '#e23ea0';
+            playhead.style.left = '0px';
+            trackSubs.innerHTML = '<div class="track-grid"></div>';
+            trackEffects.innerHTML = '<div class="track-grid"></div>';
+            document.getElementById('preview-area').className = 'studio-preview-area';
+            document.getElementById('preview-area').style.background = '#000';
+            window.speechSynthesis.cancel();
+        }
+
+        function stopAll() {
+            audio.pause();
+            isPlaying = false;
+            window.speechSynthesis.cancel();
+            document.getElementById('play-btn').textContent = '▶ Play';
+            document.getElementById('play-btn').style.background = '#e23ea0';
+        }
+
+        // Добавляем CSS для эффектов в превью
+        const style = document.createElement('style');
+        style.textContent = `
+            .effect-shake { animation: shake 0.2s infinite; }
+            .effect-invert { filter: invert(1); }
+            .effect-glitch { animation: glitch 0.1s infinite; }
+            @keyframes shake { 0% { transform: translate(1px, 1px) rotate(0deg); } 10% { transform: translate(-1px, -2px) rotate(-1deg); } 20% { transform: translate(-3px, 0px) rotate(1deg); } 30% { transform: translate(3px, 2px) rotate(0deg); } 40% { transform: translate(1px, -1px) rotate(1deg); } 50% { transform: translate(-1px, 2px) rotate(-1deg); } 60% { transform: translate(-3px, 1px) rotate(0deg); } 70% { transform: translate(3px, 1px) rotate(-1deg); } 80% { transform: translate(-1px, -1px) rotate(1deg); } 90% { transform: translate(1px, 2px) rotate(0deg); } 100% { transform: translate(1px, -2px) rotate(-1deg); } }
+            @keyframes glitch { 0% { clip-path: inset(10% 0 30% 0); transform: translate(-2px, 2px); } 20% { clip-path: inset(40% 0 20% 0); transform: translate(2px, -2px); } 40% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, 0); } 60% { clip-path: inset(60% 0 10% 0); transform: translate(2px, 2px); } 80% { clip-path: inset(30% 0 40% 0); transform: translate(-2px, -2px); } 100% { clip-path: inset(10% 0 30% 0); transform: translate(0); } }
+        `;
+        document.head.appendChild(style);
 
     </script>
 </body>
